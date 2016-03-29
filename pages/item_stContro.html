@@ -2,154 +2,204 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Shop Item - Start Bootstrap Template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/shop-item.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Steam Controller</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <!-- Timeline CSS -->
+  <link href="../css/timeline.css" rel="stylesheet">
+  <!-- Custom SB-Admin2 CSS -->
+  <link href="../css/sb-admin-2.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom Shop-item CSS -->
+  <link href="../css/shop-item.css" rel="stylesheet">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
 </head>
 
 <body>
+  <div id="wrapper">
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">關於</a>
-                    </li>
-                    <li>
-                        <a href="#">服務</a>
-                    </li>
-                    <li>
-                        <a href="#">聯繫</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">元經樵屋頂拍賣</a>
+      </div>
+      <!-- /.navbar-header -->
+      <ul class="nav navbar-top-links navbar-right">
+        <!-- /.dropdown -->
+        <li>
+          <a href="bulletin.html">
+            <i class="fa fa-info-circle fa-fw"></i> 系統公告與關於我們<i class="fa"></i>
+          </a>
+          <!-- /.dropdown-bulletin -->
+        </li>
+        <!-- /.dropdown -->
+        <li>
+          <a href="#">
+            <i class="fa fa-shopping-cart fa-fw"></i> 購物車<i class="fa"></i>
+          </a>
+          <!-- /.dropdown-shopcart -->
+        </li>
+        <!-- /.dropdown -->
+        <li>
+          <a href="signin.html">
+            <i class="fa fa-sign-in fa-fw"></i> 登入<i class="fa"></i>
+          </a>
+          <!-- /.dropdown-plus -->
+        </li>
+        <!-- /.dropdown -->
+        <li>
+          <a href="signup.html">
+            <i class="fa fa-plus-square fa-fw"></i> 加入會員<i class="fa"></i>
+          </a>
+          <!-- /.dropdown-plus -->
+        </li>
+      </ul>
+      <!-- /.navbar-top-links -->
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="請填入欲搜尋的商品名">
+                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+              </div>
+              <!-- /input-group -->
+            </li>
+            <li>
+              <a href="book.html"><i class="fa fa-book fa-fw"></i> 圖書</a>
+            </li>
+            <li>
+              <a href="digi.html"><i class="fa fa-desktop fa-fw"></i> 電腦電子周邊</a>
+            </li>
+            <li>
+              <a href="toy.html"><i class="fa fa-gamepad fa-fw"></i> 電玩遊戲</a>
+            </li>
+            <li>
+              <a href="sports.html"><i class="fa fa-bicycle fa-fw"></i> 運動用品</a>
+            </li>
+          </ul>
         </div>
-        <!-- /.container -->
+        <!-- /.sidebar-collapse -->
+      </div>
+      <!-- /.navbar-static-side -->
     </nav>
-    <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <p class="lead">元經樵屋頂拍賣</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="Steam_controller.jpg" alt="">
-                    <div class="caption-full">
-                        <h4 class="pull-right">NT$1,500</h4>
-                        <h4><a href="#">Steam Controller</a>
+
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="thumbnail">
+            <img class="img-responsive" src="../images/Steam_controller_800x300.jpg" alt="Steam Controller">
+            <div class="caption-full">
+              <h4 class="pull-right">NT$1,500</h4>
+              <h4><a href="#">Steam Controller</a>
                         </h4>
-                        <a href="#">
-                            <button class="btn btn-danger centered">加入購物車</button>
-                        </a>
-                        <p>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp在您最喜愛的遊戲中體驗前所未見的精準控制。Steam 控制器能讓您在電視上遊玩您目前所有的 Steam 遊戲 ─ 就連原先不支援控制器的遊戲也能輕鬆暢玩。雙觸控板、高真觸感回饋效果、二段式板機、背部按鈕、及能完全自行定義的控制設定。您能從社群中尋找到您最喜愛的設定配置，或建立與分享您的個人設定配置。 我們改良了傳統控制器的輸入解析度與傳真度。利用了高精密輸入技術並著重於降低延遲、同時提高無線效能，Steam 控制器將能提供一個全新的方式讓您體驗遊戲。 Steam 控制器的雙觸控板，能為電腦遊戲在客廳內提供高傳真的輸入。依據遊戲種類的不同，開發者或使用者能透過自訂的虛擬的軌跡球、適性搖桿或方向盤，來提供 1：1 比例的絕對輸入。 位於控制器兩側的觸感動力效果器，能提供以微秒為單位的精密及高傳真回饋效果。感受虛擬軌跡球的滾動、滑鼠滾輪的轉動、或步槍的板機效果。每一次的輸入，從板機到觸控版，都將能為您的指尖帶來相應的回饋震動，高頻率的提供速度、邊界、門檻、材質、或動作等極為重要的觸感回饋效果。 Steam 控制器上的每一個輸入區域與按鈕的配置，都是依據使用頻率、所需精密度以及舒適度而設計。
-                        </p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">3 則回覆留言</p>
-                        <p>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span> 4.0
-                        </p>
-                    </div>
-                </div>
-                <div class="well">
-                    <div class="text-right">
-                        <a class="btn btn-success">回覆</a>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span> 匿名
-                            <span class="pull-right">10 天前</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span> 匿名
-                            <span class="pull-right">12 天前</span>
-                            <p>It's  so  good~~</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span> 匿名
-                            <span class="pull-right">15 天前</span>
-                            <p>最近搖桿壞了，趕緊換一支
-                            </p>
-                        </div>
-                    </div>
-                </div>
+              <a href="#">
+                <button class="btn btn-danger centered">加入購物車</button>
+              </a>
+              <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp在您最喜愛的遊戲中體驗前所未見的精準控制。Steam 控制器能讓您在電視上遊玩您目前所有的 Steam 遊戲 ─ 就連原先不支援控制器的遊戲也能輕鬆暢玩。雙觸控板、高真觸感回饋效果、二段式板機、背部按鈕、及能完全自行定義的控制設定。您能從社群中尋找到您最喜愛的設定配置，或建立與分享您的個人設定配置。 我們改良了傳統控制器的輸入解析度與傳真度。利用了高精密輸入技術並著重於降低延遲、同時提高無線效能，Steam 控制器將能提供一個全新的方式讓您體驗遊戲。
+                Steam 控制器的雙觸控板，能為電腦遊戲在客廳內提供高傳真的輸入。依據遊戲種類的不同，開發者或使用者能透過自訂的虛擬的軌跡球、適性搖桿或方向盤，來提供 1：1 比例的絕對輸入。 位於控制器兩側的觸感動力效果器，能提供以微秒為單位的精密及高傳真回饋效果。感受虛擬軌跡球的滾動、滑鼠滾輪的轉動、或步槍的板機效果。每一次的輸入，從板機到觸控版，都將能為您的指尖帶來相應的回饋震動，高頻率的提供速度、邊界、門檻、材質、或動作等極為重要的觸感回饋效果。 Steam 控制器上的每一個輸入區域與按鈕的配置，都是依據使用頻率、所需精密度以及舒適度而設計。
+              </p>
             </div>
-        </div>
-    </div>
-    <!-- /.container -->
-    <div class="container">
-        <hr>
-        <!-- Footer -->
-        <footer>
+            <div class="ratings">
+              <p class="pull-right">3 則回覆留言</p>
+              <p>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-o"></span> 4.0
+              </p>
+            </div>
+          </div>
+          <div class="well">
+            <div class="text-right">
+              <a class="btn btn-success">回覆</a>
+            </div>
+            <hr>
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
+              <div class="col-md-12">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-o"></span> 匿名
+                <span class="pull-right">10 天前</span>
+                <p>This product was great in terms of quality. I would definitely buy another!</p>
+              </div>
             </div>
-        </footer>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-o"></span> 匿名
+                <span class="pull-right">12 天前</span>
+                <p>It's so good~~</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-o"></span> 匿名
+                <span class="pull-right">15 天前</span>
+                <p>最近搖桿壞了，趕緊換一支
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.container -->
+    <!-- /#wrapper -->
+    <div class="container">
+      <hr>
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>客服專線：0912345678</p>
+            <p>客服時間：週二18:30~21:00（例假日除外）</p>
+            <p>地址：彰化師範大學寶山校區工學院EB211 </p>
+          </div>
+        </div>
+      </footer>
+    </div>
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/sb-admin-2.js"></script>
 </body>
 
 </html>
