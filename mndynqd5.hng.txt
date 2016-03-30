@@ -1,0 +1,12 @@
+﻿修改trine3_800x300圖片、刪了多餘的三鐵車圖片
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	renamed:    "images/\350\241\214\347\202\272\347\232\204\350\227\235\350\241\223_800x300.jpg" -> images/TheArtofThinkingClearly_800x300.jpg
+#	deleted:    images/triAdvPro (1).jpg
+#	modified:   images/trine3_800x300.jpg
+#
+
