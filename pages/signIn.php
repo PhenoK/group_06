@@ -61,10 +61,10 @@
 
 <body>
   <div id="wrapper">
+    <?php include 'navbarTop.php'; ?>
+  </nav>
 
-  <?php include 'navbarTop.php'; ?>
-  <?php include 'navbarSide.php'; ?>
-    <div id="page-wrapper">
+    <div >
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-primary">
