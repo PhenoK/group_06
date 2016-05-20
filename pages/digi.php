@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
-  <?php include 'head_include.html'; ?>
+  <title>元經樵 - 電腦電子週邊</title>
+  <?php include 'head.php'; ?>
 <body>
   <div id="wrapper">
-    <?php include 'navBar.html'; ?>
+    <?php include 'navbarTop.php'; ?>
+    <?php include 'navbarSide.php'; ?>
     <div id="page-wrapper">
       <!-- Page Header -->
       <div class="row">

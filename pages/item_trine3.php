@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
-  <?php include 'head_include.html'; ?>
+  <?php include 'head.php'; ?>
 </head>
 
 <body>
   <div id="wrapper">
-    <?php include 'navBar.html'; ?>
+    <?php include 'navbarTop.php'; ?>
+    <?php include 'navbarSide.php'; ?>
+
     <div id="page-wrapper">
       <div class="row">
         <div class="col-md-9">
@@ -93,19 +95,7 @@
 
     </div>
     <!-- /#wrapper -->
-    <div class="container">
-      <hr>
-      <!-- Footer -->
-      <footer>
-        <div class="row">
-          <div class="col-lg-12">
-            <p>客服專線：0912345678</p>
-            <p>客服時間：週二18:30~21:00（例假日除外）</p>
-            <p>地址：彰化師範大學寶山校區工學院EB211 </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

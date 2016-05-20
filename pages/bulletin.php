@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>系統公告與關於我們</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <!-- Optional theme -->
@@ -29,56 +28,14 @@
 
   <!--jQuery-->
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
-
+  <title>系統公告與關於我們</title>
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
   <div id="wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">元經樵屋頂拍賣</a>
-      </div>
-      <!-- /.navbar-header -->
-      <ul class="nav navbar-top-links navbar-right">
-        <!-- /.dropdown -->
-        <li>
-          <a href="bulletin.html">
-            <i class="fa fa-info-circle fa-fw"></i> 系統公告與關於我們<i class="fa"></i>
-          </a>
-          <!-- /.dropdown-bulletin -->
-        </li>
-        <!-- /.dropdown -->
-        <li>
-          <a href="#">
-            <i class="fa fa-shopping-cart fa-fw"></i> 購物車<i class="fa"></i>
-          </a>
-          <!-- /.dropdown-shopcart -->
-        </li>
-        <!-- /.dropdown -->
-        <li>
-          <a href="signIn.html">
-            <i class="fa fa-sign-in fa-fw"></i> 登入<i class="fa"></i>
-          </a>
-          <!-- /.dropdown-plus -->
-        </li>
-        <!-- /.dropdown -->
-        <li>
-          <a href="signUp.html">
-            <i class="fa fa-plus-square fa-fw"></i> 加入會員<i class="fa"></i>
-          </a>
-          <!-- /.dropdown-plus -->
-        </li>
-      </ul>
-    </nav>
+    <?php include 'navbarTop.php'; ?>
   </div>
   <!-- announce Section -->
   <section id="announce" class="announce-section">

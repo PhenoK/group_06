@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
-  <?php include 'head_include.html'; ?>
+  <title>歡迎來到元經樵屋頂拍賣</title>
+  <?php include 'head.php'; ?>
 </head>
 
 <body>
   <div id="wrapper">
-    <?php include 'navBar.html'; ?>
+    <?php include 'navbarTop.php'; ?>
+    <?php include 'navbarSide.php'; ?>
     <div id="page-wrapper">
       <div class="row">
         <div class="col-md-12">
@@ -38,7 +40,6 @@
                 </a>
               </div>
             </div>
-
           </div>
 
           <div class="row">
@@ -111,10 +112,10 @@
 
             <div class="col-sm-4 col-lg-4 col-md-4">
               <div class="thumbnail">
-                <img src="../images/Trine3.jpg" alt="trine3">
+                <img src="http://cdn.kingstone.com.tw/book/images/product/20147/2014713465917/2014713465917b.jpg" alt="trine3">
                 <div class="caption">
                   <h4 class="pull-right">NT$499</h4>
-                  <h4><a href="item_trine3.html">Trine 3（魔幻三傑3）</a></h4>
+                  <h4><a href="item_trine3.php">Trine 3（魔幻三傑3）</a></h4>
                   <p>以童話故事般的場景與令人絞盡腦汁的謎題機關而聞名的《魔幻三俠 3 Trine 3: The Artifacts of Power》在Steam上推出了搶先體驗版， 我們所熟悉的三位英雄又將再度集結，追捕逃出封印的遠古邪惡巫師！
                   </p>
                 </div>
@@ -184,19 +185,8 @@
   </div>
   <!-- /#wrapper -->
 
-  <div class="container">
-    <hr>
-    <!-- Footer -->
-    <footer>
-      <div class="row">
-        <div class="col-lg-12">
-          <p>客服專線：0912345678</p>
-          <p>客服時間：週二18:30~21:00（例假日除外）</p>
-          <p>地址：彰化師範大學寶山校區工學院EB211 </p>
-        </div>
-      </div>
-    </footer>
-  </div>
+  <?php include 'footer.php'; ?>
+
 </body>
 
 </html>

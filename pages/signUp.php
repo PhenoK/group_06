@@ -2,57 +2,37 @@
 <html lang="en">
 
 <head>
-    <title>會員註冊</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <title>元經樵 - 會員註冊</title>
+  <?php include 'head.php'; ?>
+  <style type="text/css">
+  .error {
+      color: #D82424;
+      font-weight: normal;
+      font-family: "微軟正黑體";
+      display: block;
+      padding: 1px;
+  }
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <!-- Timeline CSS -->
-    <link href="../css/timeline.css" rel="stylesheet">
-    <!-- Custom SB-Admin2 CSS -->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
-    <style type="text/css">
-    .error {
-        color: #D82424;
-        font-weight: normal;
-        font-family: "微軟正黑體";
-        display: block;
-        padding: 1px;
-    }
+  .panel-height {
+      height: 500px;
+  }
 
-    .panel-height {
-        height: 500px;
-    }
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th {
+      font-color: rgb(0, 0, 204);
+      font-family: "微軟正黑體";
+  }
 
-    .table-bordered > tbody > tr > td,
-    .table-bordered > tfoot > tr > th {
-        font-color: rgb(0, 0, 204);
-        font-family: "微軟正黑體";
-    }
-
-    textarea {
-        resize: none;
-    }
-    </style>
+  textarea {
+      resize: none;
+  }
+  </style>
 </head>
 
 <body>
-    <div class="container">
+  <div id="wrapper">
+    <?php include 'navbarTop.php'; ?>
+    <?php include 'navbarSide.php'; ?>
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
@@ -146,6 +126,9 @@
             </div>
         </div>
     </div>
+
+    <?php include 'footer.php'; ?>
+
     <!-- Bootstrap Core JavaScript -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
