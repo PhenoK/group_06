@@ -1,0 +1,7 @@
+hr {
+    border-top: 1px solid #ccc;
+}
+.caption {
+    height: inherit;
+    overflow: visible !important;
+}
