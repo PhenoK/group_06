@@ -15,6 +15,8 @@
 <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- Custom Shop-Homepage CSS -->
 <link href="../css/shop-homepage.css" rel="stylesheet">
+<!-- group_06 css -->
+<link href="../css/group_06.css" rel="stylesheet">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

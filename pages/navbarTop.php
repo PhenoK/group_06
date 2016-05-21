@@ -21,7 +21,7 @@
         <!-- /.dropdown -->
         <?php
         // 這裡未來改成session
-        $i = 2;
+        $i = 1;
         if ($i == 1)
         {
           ?>

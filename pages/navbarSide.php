@@ -13,16 +13,13 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="book.php"><i class="fa fa-book fa-fw"></i> 圖書</a>
+                <a href="product.php?p_type=book"><i class="fa fa-book fa-fw"></i> 圖書</a>
             </li>
             <li>
-                <a href="digi.php"><i class="fa fa-desktop fa-fw"></i> 電腦電子周邊</a>
+                <a href="product.php?p_type=3c"><i class="fa fa-desktop fa-fw"></i> 電腦電子周邊</a>
             </li>
             <li>
-                <a href="toy.php"><i class="fa fa-gamepad fa-fw"></i> 電玩遊戲</a>
-            </li>
-            <li>
-                <a href="sports.php"><i class="fa fa-bicycle fa-fw"></i> 運動用品</a>
+                <a href="product.php?p_type=game"><i class="fa fa-gamepad fa-fw"></i> 電玩遊戲</a>
             </li>
         </ul>
     </div>
