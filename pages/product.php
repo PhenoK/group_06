@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+include_once 'initial.php';
 include_once 'connect.php';
 // tb: table
 switch (@$_GET['p_type']) {
@@ -69,18 +70,17 @@ switch (@$_GET['p_type']) {
           else {
             $cur_page = 1;
           }
-
           // 根據當前頁數計算要從資料表的第幾筆資料開始提取
           $offset = ($cur_page - 1) * $per;
           mysqli_data_seek($result, $offset);
           for ($i = 1; $i <= $per; ++$i){
             $row = mysqli_fetch_assoc($result);
-
+            $id = $row['id'];
             ?>
             <div class="row">
               <!-- div img -->
               <div class="col-sm-2 col-lg-2 col-md-2">
-                <a href="#_">
+                <a href="item.php?id=<?=$row['id'] ?>">
                   <img src="<?=$row['pre_img'] ?>" alt="" class="img-thumbnail">
                 </a>
               </div>
@@ -101,9 +101,8 @@ switch (@$_GET['p_type']) {
                     <span class="fa fa-star-half-o"></span>
                   </p>
                 </div>
-                <a href="#">
-                  <button class="btn btn-danger centered"><i class="fa fa-shopping-cart fa-fw"></i> 加入購物車<i class="fa"></i></button>
-                </a>
+                <?php include "cartAddRemove.php"; ?>
+                <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$row['id'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
                 <h4 class="pull-right">79折 特價<?=$row['price'] ?>元</h4>
               </div>
             </div>

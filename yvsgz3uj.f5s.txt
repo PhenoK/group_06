@@ -1,0 +1,23 @@
+﻿之前因上傳課程網站會有上傳卡住的問題，大幅更改SB-admin2的資料夾結構，不小心將「誤以為」無關聯的metisMenu.css, js刪除（sb-admin2.js會用到）。這次補回檔案了。
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   ../css/metisMenu.css
+#	new file:   metisMenu.js
+#
+# Changes not staged for commit:
+#	modified:   ../pages/head.php
+#	modified:   ../pages/index.php
+#	modified:   ../pages/item.php
+#	modified:   ../pages/navbarTop.php
+#	modified:   ../pages/product.php
+#
+# Untracked files:
+#	../pages/cartAddRemove.php
+#	../pages/cartAddRemove_ajax.php
+#	../pages/initial.php
+#
+

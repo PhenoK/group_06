@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+include_once 'initial.php';
 include_once 'connect.php';
+
 // 先從product table該id的資料中找出是哪一type(因為GET沒有傳type)
 $id = @$_GET['id'];
 $sql = "SELECT * FROM product WHERE id=$id";
@@ -39,6 +41,7 @@ if ($result = mysqli_query($link, $sql)){
       </div>
       <!-- /.row -->
 
+      <!-- Product Info Row -->
       <div class="row">
         <!-- div img -->
         <div class="col-sm-2 col-lg-2 col-md-2">
@@ -106,9 +109,8 @@ if ($result = mysqli_query($link, $sql)){
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half-o"></span>
             </p>
-            <a href="#">
-              <button class="btn btn-danger centered"><i class="fa fa-shopping-cart fa-fw"></i> 加入購物車<i class="fa"></i></button>
-            </a>
+            <?php include "cartAddRemove.php"; ?>
+            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$row['id'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
           </div>
         </div>
         <!-- div item img -->
@@ -117,6 +119,8 @@ if ($result = mysqli_query($link, $sql)){
         </div>
       </div>
       <hr />
+      <!-- Product Row -->
+
       <p><?=mb_substr($row['content'], 0, strlen($row['content']))?></p>
       <div class="well">
         <div class="text-right">
