@@ -71,6 +71,7 @@ switch (@$_GET['p_type']) {
           }
           // 根據當前頁數計算要從資料表的第幾筆資料開始提取
           $offset = ($cur_page - 1) * $per;
+          include "cartAddRemove.php";
           mysqli_data_seek($result, $offset);
           for ($i = 1; $i <= $per; ++$i){
             $row = mysqli_fetch_assoc($result);

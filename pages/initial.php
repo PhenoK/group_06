@@ -3,6 +3,4 @@
 <?php
   // 加入、移除購物車用
   $arr_cart = array_filter(explode(",", @$_COOKIE['cart']));
-  const ADD = 1;
-  const REMOVE = 2;
 ?>
