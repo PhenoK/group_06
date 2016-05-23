@@ -27,7 +27,8 @@
           ?>
           <li>
               <a href="#">
-                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車<span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span><i class="fa"></i>
+                  <?php $arr_cart = array_filter(explode(",", @$_COOKIE['cart'])); ?>
+                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span><i class="fa"></i>
               </a>
               <!-- /.dropdown-shopcart -->
           </li>

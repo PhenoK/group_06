@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include_once 'initial.php';
 include_once 'connect.php';
 
 // 先從product table該id的資料中找出是哪一type(因為GET沒有傳type)

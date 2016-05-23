@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include_once 'initial.php';
 include_once 'connect.php';
 // tb: table
 switch (@$_GET['p_type']) {

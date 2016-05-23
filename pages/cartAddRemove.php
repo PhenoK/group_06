@@ -29,6 +29,8 @@ function cart(add_remove, id) {
 }
 </script>
 <?php
+const ADD = 1;
+const REMOVE = 2;
 // 決定傳入onclick的參數與button字樣中的動作
 if (in_array("$id", $arr_cart)){
   $cart_func_oper = REMOVE;
