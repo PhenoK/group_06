@@ -21,13 +21,19 @@
         <!-- /.dropdown -->
         <?php
         // 這裡未來改成session
-        $i = 2;
+        $i = 1;
         if ($i == 1)
         {
           ?>
           <li>
               <a href="#">
-                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車<i class="fa"></i>
+                  <?php
+                  $arr_cart = array_filter(explode(",", @$_COOKIE['cart']));
+                  define("ADD", "1");
+                  define("REMOVE", "2");
+                  ?>
+                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span>
+                  <span id="cart_price" class="badge alert-success"><i class="fa fa-usd fa-fw"></i><?=@$_COOKIE['cart_price'] ?></span><i class="fa"></i>
               </a>
               <!-- /.dropdown-shopcart -->
           </li>
