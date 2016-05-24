@@ -32,7 +32,8 @@
                   define("ADD", "1");
                   define("REMOVE", "2");
                   ?>
-                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span><i class="fa"></i>
+                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span>
+                  <span id="cart_price" class="badge alert-success"><i class="fa fa-usd fa-fw"></i><?=@$_COOKIE['cart_price'] ?></span><i class="fa"></i>
               </a>
               <!-- /.dropdown-shopcart -->
           </li>

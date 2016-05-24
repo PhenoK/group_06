@@ -93,7 +93,7 @@ if ($result = mysqli_query($link, $sql)){
                  <span>特價：</span>
                  <span>
                    <b class="dis">79</b>折
-                   <b class="dis"><?=$row['price'] ?></b>元
+                   <i class="fa fa-usd fa-fw"></i><b class="dis"><?=$row['price'] ?></b>
                  </span>
                </li>
             </ul>
@@ -110,7 +110,7 @@ if ($result = mysqli_query($link, $sql)){
               <span class="fa fa-star-half-o"></span>
             </p>
             <?php include "cartAddRemove.php"; ?>
-            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$row['id'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
+            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
           </div>
         </div>
         <!-- div item img -->
