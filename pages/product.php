@@ -1,3 +1,11 @@
+<?php
+include_once 'initial.php';
+
+// 若url沒有傳入商品type，將導向至首頁
+if (!isset($_GET['p_type']) || !$logged){
+  header('Location: index.php');
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php

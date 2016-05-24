@@ -19,41 +19,56 @@
             <!-- /.dropdown-bulletin -->
         </li>
         <!-- /.dropdown -->
-        <?php
-        // 這裡未來改成session
-        $i = 1;
-        if ($i == 1)
-        {
-          ?>
-          <li>
-              <a href="#">
-                  <?php
-                  $arr_cart = array_filter(explode(",", @$_COOKIE['cart']));
-                  define("ADD", "1");
-                  define("REMOVE", "2");
-                  ?>
-                  <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span>
-                  <span id="cart_price" class="badge alert-success"><i class="fa fa-usd fa-fw"></i><?=@$_COOKIE['cart_price'] ?></span><i class="fa"></i>
-              </a>
-              <!-- /.dropdown-shopcart -->
-          </li>
-          <!-- /.dropdown -->
-        <?php
-        }
-        ?>
-
         <li>
-            <a href="signIn.php">
-                <i class="fa fa-sign-in fa-fw"></i> 登入<i class="fa"></i>
+            <a href="shoppingCart.php">
+                <?php
+                $arr_cart = array_filter(explode(",", @$_COOKIE['cart']));
+                define("ADD", "1");
+                define("REMOVE", "2");
+                ?>
+                <i class="fa fa-shopping-cart fa-fw"></i> 購物車 <span id="cart_cnt" class="badge alert-danger"><?=sizeof($arr_cart) ?></span>
+                <span id="cart_price" class="badge alert-success"><i class="fa fa-usd fa-fw"></i><?=@$_COOKIE['cart_price'] ?></span><i class="fa"></i>
             </a>
-            <!-- /.dropdown-plus -->
+            <!-- /.dropdown-shopcart -->
         </li>
         <!-- /.dropdown -->
-        <li>
-            <a href="signUp.php">
-                <i class="fa fa-plus-square fa-fw"></i> 加入會員<i class="fa"></i>
-            </a>
-            <!-- /.dropdown-plus -->
-        </li>
+        <?php
+        // initial.php會檢查session，其中的$logged為登入狀態
+        if (!$logged){
+          ?>
+          <li>
+              <a href="signIn.php">
+                  <i class="fa fa-sign-in fa-fw"></i> 登入<i class="fa"></i>
+              </a>
+              <!-- /.dropdown-plus -->
+          </li>
+          <!-- /.dropdown -->
+          <li>
+              <a href="signUp.php">
+                  <i class="fa fa-plus-square fa-fw"></i> 加入會員<i class="fa"></i>
+              </a>
+              <!-- /.dropdown-plus -->
+          </li>
+          <?php
+        }
+        else {
+          ?>
+          <li>
+              <a href="profile.php">
+                  <i class="fa fa-user fa-fw"></i> 個人帳戶<i class="fa"></i>
+              </a>
+              <!-- /.dropdown-plus -->
+          </li>
+          <!-- /.dropdown -->
+          <li>
+              <a href="signIn.php?action=logout">
+                  <i class="fa fa-sign-out fa-fw"></i> 登出<i class="fa"></i>
+              </a>
+              <!-- /.dropdown-plus -->
+          </li>
+          <!-- /.dropdown -->
+          <?php
+        }
+         ?>
     </ul>
     <!-- /.navbar-top-links -->

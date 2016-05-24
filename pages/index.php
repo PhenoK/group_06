@@ -1,3 +1,7 @@
+<?php
+include_once 'initial.php';
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 

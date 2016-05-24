@@ -1,3 +1,24 @@
+<?php
+  include_once 'initial.php';
+  include_once 'connect.php';
+
+  // 點下登出按鈕將會以GET傳送action=logout
+  if (isset($_GET['action'])){
+    $action = $_GET['action'];
+    
+    // 若要登出 && 真有SESSION登入狀態
+    if ($action == "logout" && isset($_SESSION['user'])){
+      // 解除session
+      unset($_SESSION['user']);
+      header("Location: index.php");
+    }
+  }
+  else if (isset($_SESSION['user'])){
+    // 若來到此網頁，但已有session狀態，導向到首頁
+    header("Location: index.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +31,8 @@
   <!--additional method - for checkbox .. ,require_from_group method ...-->
   <script>
   $(document).ready(function($) {
-
-
       $("#form_sI").validate({
           submitHandler: function(form) {
-              alert("登入成功!");
               form.submit();
           },
 
@@ -72,7 +90,7 @@
                         <h3 class="panel-title" style="text-align: center;">元經樵屋頂拍賣會員登入</h3>
                     </div>
                     <div class="panel-body panel-height">
-                        <form class="form-horizontal" role="form" id="form_sI">
+                        <form class="form-horizontal" role="form" id="form_sI" method="post" action="signIn.php">
                             <fieldset>
                                 <div class="form-group">
                                     <div class="row">
@@ -90,6 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span id="error"></span>
                                 <div class="row">
                                     <div class="col-md-offset-3">
                                         <div class="checkbox">
@@ -124,5 +143,30 @@
     <!-- Custom Theme JavaScript -->
     <script src="../js/sb-admin-2.js"></script>
 </body>
+<?php
+  $error = $user = $pwd = "";
 
+  // 成功送出表單
+  if (isset($_POST['account'])){
+    $user = $_POST['account'];
+    $pwd = $_POST['password'];
+
+    // 利用取得的值驗證是否登入成功
+    $sql = "SELECT account, password FROM member WHERE account = '$user' AND password = '$pwd'";
+
+    $result = mysqli_query($link, $sql);
+    // 若取得資料數0筆 => 無吻合
+    if (mysqli_num_rows($result) == 0){
+      ?>
+      <script> $('#error').text('帳號或密碼錯誤！').css('color', 'red'); </script>;
+      <?php
+    }
+    else {
+      // 登入成功，設定session
+      $_SESSION['user'] = $user;
+      header('Location: index.php');
+    }
+  }
+
+ ?>
 </html>
