@@ -3,7 +3,190 @@
 
 <head>
   <title>元經樵 - 會員註冊</title>
+
   <?php include 'head.php'; ?>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
+  <script language = JavaScript>
+    var accountcheck=function(){
+        $.ajax({
+            url: "acc_ck.php",
+            data: $('#form_sU').serialize(),
+            type:"POST",
+            dataType:'text',
+            success: function(msg){
+                $("#acc_msg").html(msg);
+            },
+            /*beforeSend:function(){
+                $('#loadingIMG').show();
+            },
+            complete:function(){
+                $('#loadingIMG').hide();*/
+            },
+            error:function(xhr, ajaxOptions, thrownError){
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    }
+
+  </script>
+
+
+  <script>
+  $(document).ready(function($) {
+
+    jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value.indexOf(" ") < 0;
+        }, "請勿輸入空格");
+
+    jQuery.validator.addMethod("chEn", function(value, element) {
+            return this.optional(element) || /^[A-Za-z\u4e00-\u9fa5]+$/.test(value);
+        }, "只能輸入中/英文");
+
+    jQuery.validator.addMethod("ch", function(value, element) {
+            return this.optional(element) || /^[\u4e00-\u9fa5]+$/.test(value);
+        }, "只能輸入中文");
+
+
+    jQuery.validator.addMethod("enNum", function(value, element) {
+            return this.optional(element) || /^[A-Za-z0-9]+$/.test(value);
+        }, "只能輸入英文、數字");
+
+    jQuery.validator.addMethod("Num", function(value, element) {
+            return this.optional(element) || /^[0-9]+$/.test(value);
+        }, "只能輸入數字");
+
+      $("#form_sU").validate({
+        submitHandler: function(form) {
+              alert("註冊成功!");
+              form.submit();
+        },
+
+        errorPlacement: function (error, element) {
+    if (element.is(':radio')) {
+        var eid = element.attr('name');
+        $('input[name=' + eid + ']:last').next().after(error);
+    } 
+    else if(element.is(':checkbox')){
+        var eid = element.attr('name');
+        $('input[name=' + eid + ']:last').next().after(error);
+    }
+    else {
+        error.insertAfter(element);
+    }
+},
+
+        rules: {
+            account: {
+                required: true,
+                minlength: 6,
+                maxlength: 12,
+                noSpace:true,
+                enNum:true,
+            },
+            pwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 12,
+                noSpace:true,
+                enNum:true,
+            },
+            pwd_ck:{
+                required: true,
+                minlength: 6,
+                maxlength: 12,
+                equalTo: "#pwd",
+            },
+            user:{
+                required:true,
+                maxlength:5,
+                chEn:true,
+                noSpace:true,
+            },
+            gender:{
+                required:true,
+            },
+            birth:{
+                required:true,
+                dateISO:true,
+                noSpace:true,
+            },
+            tel:{
+                maxlength:20,
+                noSpace:true,
+                Num:true,
+
+            },
+            addr:{
+                noSpace:true,
+            },
+            mail:{
+                required:true,
+                email:true,
+                noSpace:true
+            },
+            nickname:{
+                required:true,
+                maxlength:10,
+                noSpace:true,
+            },
+            agree:{
+                required:true
+            }
+
+              
+
+          },
+        messages: {
+            account: {
+                required: "帳號為必填欄位",
+                minlength: "帳號最少要6個字",
+                maxlength: "帳號最長12個字",
+            },
+            pwd: {
+                required: "密碼為必填欄位",
+                minlength: "密碼最少要6個字",
+                maxlength: "密碼最長12個字",
+            },
+            pwd_ck: {
+                required: "請再次輸入密碼",
+                minlength: "密碼最少要6個字",
+                maxlength: "密碼最長12個字",
+                equalTo:"與密碼不符",
+            },
+            user:{
+                required:"姓名為必填欄位",
+                maxlength:"姓名最長5個字",
+            },
+            gender:{
+                required:"請選擇性別",
+            },
+            birth:{
+                required:"請輸入生日(YYYY/MM/DD)",
+                dateISO:"請輸入生日(YYYY/MM/DD)",
+            },
+            tel:{
+                maxlength:"長度最長20字",
+            },
+            mail:{
+                required:"請輸入電子郵件",
+                email:"格式不合",
+            },
+            nickname:{
+                required:"請輸入暱稱",
+                maxlength:"長度最長10個字",
+            },
+            agree:{
+                required:"請詳閱會員合約並勾選同意"
+            }
+        }
+      });
+
+  });
+  </script>
+
   <style type="text/css">
   .error {
       color: #D82424;
@@ -13,8 +196,8 @@
       padding: 1px;
   }
 
-  .panel-height {
-      height: 500px;
+ .panel-height {
+      height: 650px;
   }
 
   .table-bordered > tbody > tr > td,
@@ -32,57 +215,83 @@
 <body>
   <div id="wrapper">
     <?php include 'navbarTop.php'; ?>
-    
+    </nav>
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading text-center">會員資料填寫</div>
                     <div class="panel-body panel-height">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" method="POST" id="form_sU">
                             <fieldset>
                                 <div class="form-group">
                                     <table class="table table-bordered col-md-8 col-md-offset-1" style="margin: 5px;">
                                         <tbody>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">帳號</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"> <label for="account">帳號</label>
+                                                </td>
                                                 <td class="col-md-6 col-md-offset-2">
-                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="account" name="account" placeholder="限6-12個字">
+                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="account" name="account" placeholder="限6-12個字"><label id="acc_msg"></label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">密碼</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="pwd">密碼</label>
+                                                 </td>
                                                 <td>
                                                     <input type="password" class="form-inline col-md-4 col-md-offset-1" id="pwd" name="pwd" placeholder="限6-12個字">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">密碼確認</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="pwd_ck">密碼確認</label></td>
                                                 <td>
-                                                    <input type="password" class="form-inline col-md-4 col-md-offset-1" id="pwd2" name="pwd2" placeholder="請再次輸入密碼">
+                                                    <input type="password" class="form-inline col-md-4 col-md-offset-1" id="pwd_ck" name="pwd_ck" placeholder="請再次輸入密碼">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">姓名</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="user">姓名</label></td>
                                                 <td>
                                                     <input type="text" class="form-inline col-md-4 col-md-offset-1" id="user" name="user" placeholder="">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">身分證字號</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="gender">姓別</label> </td>
                                                 <td>
-                                                    <input type="ptext" class="form-inline col-md-4 col-md-offset-1" id="idnum" name="idnum" placeholder="">
+                                                    <div class="col-md-1"></div>
+                                                    <input class="form-inline col-md-1" type="radio"  id="gender" name="gender" value="M">
+                                                    <label class="pull-left">男 性</label>
+                                                    
+                                                    <div class="col-md-1"></div>
+                                                    <input class="form-inline col-md-1" type="radio"  id="gender" name="gender" value="F">
+                                                    <label class="pull-left">女 性</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">手機號碼</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="birth">生日</label></td>
                                                 <td>
-                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="cellphone" name="cellphone" placeholder="">
+                                                    <input type="ptext" class="form-inline col-md-4 col-md-offset-1" id="birth" name="birth" placeholder="例:1999/09/01">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="col-md-1 col-md-offset-3 text-right">E-mail</td>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="tel">電話號碼</label></td>
                                                 <td>
-                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="mail" name="mail" placeholder="">
+                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="tel" name="tel" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="addr">地址</label></td>
+                                                <td>
+                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="addr" name="addr" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="mail">電子郵件</label></td>
+                                                <td>
+                                                    <input type="mail" class="form-inline col-md-4 col-md-offset-1" id="mail" name="mail" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-1 col-md-offset-3 text-right"><label for="nickname">暱稱</label></td>
+                                                <td>
+                                                    <input type="text" class="form-inline col-md-4 col-md-offset-1" id="nickname" name="nickname" placeholder="">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -96,15 +305,12 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input name="agree" type="checkbox" value="agree">同意會員合約。
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-md-offset-3"><input class="form-inline col-md-1" id="agree" name="agree" type="checkbox" value="agree"><label class="form-inline col-md-5">同意會員合約。</label></div>
+                                    
+                                    
                                 </div>
+                                
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-2 col-sm-offset-3">
