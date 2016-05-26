@@ -1,3 +1,13 @@
+<?php
+include_once 'initial.php';
+
+
+if ($logged){
+  header('Location: index.php');
+}
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +79,7 @@
     if (element.is(':radio')) {
         var eid = element.attr('name');
         $('input[name=' + eid + ']:last').next().after(error);
-    } 
+    }
     else if(element.is(':checkbox')){
         var eid = element.attr('name');
         $('input[name=' + eid + ']:last').next().after(error);
@@ -137,7 +147,7 @@
                 required:true
             }
 
-              
+
 
           },
         messages: {
@@ -259,7 +269,7 @@
                                                     <div class="col-md-1"></div>
                                                     <input class="form-inline col-md-1" type="radio"  id="gender" name="gender" value="M">
                                                     <label class="pull-left">男 性</label>
-                                                    
+
                                                     <div class="col-md-1"></div>
                                                     <input class="form-inline col-md-1" type="radio"  id="gender" name="gender" value="F">
                                                     <label class="pull-left">女 性</label>
@@ -308,10 +318,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5 col-md-offset-3"><input class="form-inline col-md-1" id="agree" name="agree" type="checkbox" value="agree"><label class="form-inline col-md-5">同意會員合約。</label></div>
-                                    
-                                    
+
+
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-2 col-sm-offset-3">
