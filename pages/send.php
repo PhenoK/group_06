@@ -1,7 +1,6 @@
 <?php
                 
-        $link = mysqli_connect("localhost","root","123456","group_06")
-        or die("無法開啟MySQL資料庫連結!<br>");    
+       include('connect.php');    
 
         if (!$link ) {
             echo "連結錯誤代碼: ".mysqli_connect_errno()."<br>";
