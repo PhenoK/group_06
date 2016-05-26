@@ -2,7 +2,7 @@
 include_once 'initial.php';
 
 // 若url沒有傳入商品id，將導向至首頁
-if (!isset($_GET['id']) || !$logged){
+if (!isset($_GET['id'])){
   header('Location: index.php');
 }
  ?>

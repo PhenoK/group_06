@@ -2,7 +2,7 @@
 include_once 'initial.php';
 
 // 若url沒有傳入商品type，將導向至首頁
-if (!isset($_GET['p_type']) || !$logged){
+if (!isset($_GET['p_type'])){
   header('Location: index.php');
 }
  ?>
@@ -56,6 +56,10 @@ switch (@$_GET['p_type']) {
         if ($result = mysqli_query($link, $sql)){
           // 取出資料數
           $tb_rec = mysqli_num_rows($result);
+          // 若沒資料就不用顯示了
+          if ($tb_rec == 0){
+            die("目前尚無商品資料唷！");
+          }
           // 每一頁有幾筆
           $per = 5;
           // 計算共需幾頁

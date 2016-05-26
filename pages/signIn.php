@@ -1,22 +1,55 @@
 <?php
-  include_once 'initial.php';
-  include_once 'connect.php';
+include_once 'initial.php';
+include_once 'connect.php';
+$error = $user = $pwd = "";
 
-  // 點下登出按鈕將會以GET傳送action=logout
-  if (isset($_GET['action'])){
-    $action = $_GET['action'];
-    
-    // 若要登出 && 真有SESSION登入狀態
-    if ($action == "logout" && isset($_SESSION['user'])){
-      // 解除session
-      unset($_SESSION['user']);
-      header("Location: index.php");
-    }
+// 成功送出表單
+if (isset($_POST['account'])){
+  $user = $_POST['account'];
+  $pwd = $_POST['password'];
+
+  // 利用取得的值驗證是否登入成功
+  $sql = "SELECT * FROM member WHERE account = '$user' AND password = '$pwd'";
+
+  $result = mysqli_query($link, $sql);
+  // 若取得資料數0筆 => 無吻合
+  if (mysqli_num_rows($result) == 0){
+    ?>
+    <script>
+    $(document).ready(function($) {
+      $('#error').text('帳號或密碼錯誤！').css('color', 'red');
+    )};
+    </script>
+    <?php
   }
-  else if (isset($_SESSION['user'])){
-    // 若來到此網頁，但已有session狀態，導向到首頁
+  else {
+    // 登入成功，設定登入狀態session
+    $_SESSION['user'] = $user;
+    
+    $row = mysqli_fetch_assoc($result);
+    // 設定使用者等級session
+    $_SESSION['level'] = $row['level'];
+    header('Location: index.php');
+  }
+}
+
+
+// 點下登出按鈕將會以GET傳送action=logout
+if (isset($_GET['action'])){
+  $action = $_GET['action'];
+
+  // 若要登出 && 真有SESSION登入狀態
+  if ($action == "logout" && isset($_SESSION['user'])){
+    // 解除session
+    unset($_SESSION['user']);
+    unset($_SESSION['level']);
     header("Location: index.php");
   }
+}
+else if (isset($_SESSION['user'])){
+  // 若來到此網頁，但已有session狀態，導向到首頁
+  header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -143,30 +176,4 @@
     <!-- Custom Theme JavaScript -->
     <script src="../js/sb-admin-2.js"></script>
 </body>
-<?php
-  $error = $user = $pwd = "";
-
-  // 成功送出表單
-  if (isset($_POST['account'])){
-    $user = $_POST['account'];
-    $pwd = $_POST['password'];
-
-    // 利用取得的值驗證是否登入成功
-    $sql = "SELECT account, password FROM member WHERE account = '$user' AND password = '$pwd'";
-
-    $result = mysqli_query($link, $sql);
-    // 若取得資料數0筆 => 無吻合
-    if (mysqli_num_rows($result) == 0){
-      ?>
-      <script> $('#error').text('帳號或密碼錯誤！').css('color', 'red'); </script>;
-      <?php
-    }
-    else {
-      // 登入成功，設定session
-      $_SESSION['user'] = $user;
-      header('Location: index.php');
-    }
-  }
-
- ?>
 </html>

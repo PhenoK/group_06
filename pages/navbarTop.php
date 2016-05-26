@@ -52,7 +52,20 @@
           <?php
         }
         else {
+          // 若為管理者
+          if ($_SESSION['level'] == 2){
+            ?>
+            <li>
+                <a href="controlPanel.php">
+                    <i class="fa fa-sitemap fa-fw"></i> 網站控制台<i class="fa"></i>
+                </a>
+                <!-- /.dropdown-plus -->
+            </li>
+            <!-- /.dropdown -->
+            <?php
+          }
           ?>
+
           <li>
               <a href="profile.php">
                   <i class="fa fa-user fa-fw"></i> 個人帳戶<i class="fa"></i>
