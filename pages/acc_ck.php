@@ -1,5 +1,6 @@
 <?php
-$account = trim($_POST['account']) ;
+
+$account = mysql_real_escape_string($_REQUEST['account']) ;
 
 $link = mysqli_connect("localhost","root","123456","group_06")// 建立MySQL的資料庫連結
 or die("無法開啟MySQL資料庫連結!<br>");
@@ -12,8 +13,12 @@ mysqli_query($link,"SET collation_connection = 'utf8_unicode_ci'");
 // 送出查詢的SQL指令
 if ( $result = mysqli_query($link, $sql) ) {
 	if( $row = mysqli_fetch_assoc($result) ){
-		echo "此帳號已存在";
+		echo "false";
 	} 
+	else
+	{
+		echo "true";
+	}
 mysqli_free_result($result); // 釋放佔用的記憶體
 }
 
