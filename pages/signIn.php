@@ -91,6 +91,7 @@ if (isset($_POST['account'])){
     ?>
     <script>
     $(document).ready(function(){
+			$('#error').addClass("alert alert-danger");
       $('#error').html("<i class=\"fa fa-times-circle fa-fw\"></i>帳號或密碼錯誤！<i class=\"fa\"></i>");
     });
     </script>
@@ -131,7 +132,7 @@ else if (isset($_SESSION['user'])){
 		<?php include 'navbarTop.php'; ?>
 	  </nav>
 		<div>
-        <div id="error" class="alert alert-danger"></div>
+        <div id="error"></div>
 				<div class="row">
 						<div class="col-md-4 col-md-offset-4">
 								<div class="login-panel panel panel-primary">

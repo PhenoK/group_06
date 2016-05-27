@@ -53,7 +53,7 @@
         }
         else {
           // 若為管理者
-          if ($_SESSION['level'] == 2){
+          if (@$_SESSION['level'] == 2){
             ?>
             <li>
                 <a href="controlPanel.php">
