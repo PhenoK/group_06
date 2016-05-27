@@ -13,11 +13,12 @@ if (isset($_POST['account'])){
 
   $result = mysqli_query($link, $sql);
   // 若取得資料數0筆 => 無吻合
-  if (mysqli_num_rows($result) == 0){
+  if (($num=mysqli_num_rows($result)) == 0){
     ?>
     <script>
     $(document).ready(function($) {
       $('#error').text('帳號或密碼錯誤！').css('color', 'red');
+      document.write("fdfdfdffd");
     )};
     </script>
     <?php
@@ -60,20 +61,16 @@ else if (isset($_SESSION['user'])){
 
 	<?php include 'head.php'; ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="additional-methods.min.js"></script>
 
 	<!--additional method - for checkbox .. ,require_from_group method ...-->
 	<script>
-	$(document).ready(function($) {
+	$(document).ready(function() {
 
 		jQuery.validator.addMethod("noSpace", function(value, element) {
 					return value.indexOf(" ") < 0;
 		}, "請勿輸入空格");
-
-		jQuery.validator.addMethod("chEn", function(value, element) {
-					return this.optional(element) || /^[A-Za-z\u4e00-\u9fa5]+$/.test(value);
-		}, "只能輸入中/英文");
 
 		jQuery.validator.addMethod("enNum", function(value, element) {
     			return this.optional(element) || /^[A-Za-z0-9]+$/.test(value);
@@ -82,7 +79,7 @@ else if (isset($_SESSION['user'])){
 
 			$("#form_sI").validate({
 					submitHandler: function(form) {
-							alert("登入成功!");
+						if($num!=0)
 							form.submit();
 					},
 
@@ -92,14 +89,14 @@ else if (isset($_SESSION['user'])){
 									minlength: 6,
 									maxlength: 12,
 									noSpace:true,
-									chEn:true,
 
 
 							},
 							password: {
 									required: true,
 									minlength: 6,
-									maxlength: 12
+									maxlength: 12,
+									noSpace:true
 							},
 
 					},
@@ -145,7 +142,8 @@ else if (isset($_SESSION['user'])){
 										</div>
 										<div class="panel-body panel-height">
 												<form class="form-horizontal" role="form" method="POST" id="form_sI">
-														<fieldset>
+														<span id="error"><?=$num?></span>
+															<fieldset>
 																<div class="form-group">
 																		<div class="row">
 																				<label class="col-md-2 col-md-offset-1" for="account">帳號</label>
