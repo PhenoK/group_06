@@ -19,8 +19,34 @@ $arr_cart = array_filter(explode(",", $cart));
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>元經樵 - 購物車</title>
- <?php include 'head.php'; ?>
+  <title>元經樵 - 購物車</title>
+  <?php include 'head.php'; ?>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+  <script>
+
+    $(document).ready(function() {
+      // 下拉式選單商品購買數量
+      for (var j = 1; j <= 30; ++j){
+        $('.cnt_item').append($('<option></option>').html(j).val(j));
+      }
+
+      // 若商品數量改變，小計數量也得改變
+      $('.cnt_item').change(function(){
+        // 取得選取數量
+        var num = this.options[this.selectedIndex].text;
+        // 取得該select是第幾個select（哪個商品的select）
+        var idx = $('select').index($(this));
+        // 利用此index取得該商品價格
+        var price = $('.item_price').eq(idx).text();
+        // 更改小計金額
+        $('.total_price').eq(idx).text(price * num);
+
+      });
+  });
+
+  </script>
 </head>
 
 <body>
@@ -44,13 +70,14 @@ $arr_cart = array_filter(explode(",", $cart));
           <table id="cart" class="table table-hover table-condensed table-bordered table-striped">
             <thead>
               <tr>
-                <th><h3> <strong> 項目 </strong></h3></th>
-                <th><h3> <strong> 商品編號 </strong></h3></th>
-                <th><h3> <strong> 商品名稱 </strong></h3></th>
-                <th><h3> <strong> 原價 </strong></h3></th>
-                <th><h3> <strong> 數量 </strong></h3></th>
-                <th><h3> <strong> 金額 </strong></h3></th>
-                <th> </th>
+                <th><h3><strong> 項目 </strong></h3></th>
+                <th><h3><strong> 商品編號 </strong></h3></th>
+                <th><h3><strong> 商品名稱 </strong></h3></th>
+                <th><h3><strong> 存貨量 </strong></h3></th>
+                <th><h3><strong> 原價 </strong></h3></th>
+                <th><h3><strong> 數量 </strong></h3></th>
+                <th><h3><strong> 小計 </strong></h3></th>
+                <th><h3><strong> 操作 </strong></h3></th>
               </tr>
             </thead>
             <?php
@@ -67,9 +94,15 @@ $arr_cart = array_filter(explode(",", $cart));
                 echo "<td>" . ($i + 1) . "</td>";
                 echo "<td>" . $row['id'] . "</td>";
                 echo "<td>" . $row['name'] . "</td>";
-                echo "<td id=\"item_price\">" . $row['price'] . "</td>";
-                echo "<td id=\"cnt_item\">  1   </td>";
-                echo "<td id=\"total_price\">" . $row['price'] * 1 . "</td>";
+                echo "<td>" . $row['inventory'] . "</td>";
+                echo "<td class=\"item_price\">" . $row['price'] . "</td>";
+                // 購買數量
+                echo "<td>";
+                $tmp = $i + 1;
+                echo "<select name=\"cnt_item[]\" class=\"selectpicker cnt_item\" data-width=\"fit\" data-style=\"btn-default\" data-live-search=\"true\"></select>";
+                echo "</td>";
+                // 小計
+                echo "<td class=\"total_price\">" . $row['price'] * 1 . "</td>";
                 echo "<td><button class=\"btn btn-warning\"> 刪除 </button></td>";
 
                 echo "</tr>";
