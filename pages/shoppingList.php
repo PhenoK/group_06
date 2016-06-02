@@ -117,7 +117,7 @@ $account = $_GET['account'];
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td class="pay" colspan="6"><button class="btn btn-primary"><i class="fa fa-credit-card fa-fw"></i> 點我付款</button></td>
+                    <td class="pay"><button class="btn btn-primary"><i class="fa fa-credit-card fa-fw"></i> 點我付款</button></td>
                   </tr>
                 </tfoot>
               </table>

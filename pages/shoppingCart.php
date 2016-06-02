@@ -95,6 +95,10 @@ $arr_cart = array_filter(explode(",", $cart));
       $('#checkout').on('click', function(){
         // 計算有幾件購物車品項
         var cnt_cart = $(".p_id").size();
+        if (cnt_cart == 0){
+          alert("無商品在購物車唷！");
+          return;
+        }
         // 商品id
         var arr_pId = new Array(cnt_cart);
         // 商品選擇總價

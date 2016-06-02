@@ -26,7 +26,9 @@ if (isset($_POST['arr_tPrice'])){
     $sql = "INSERT INTO order_product (b_id, product_id, quantity) VALUES ('$b_id', '$arr_pId[$i]', '$arr_quan[$i]')";
     mysqli_query($link, $sql);
   }
-  echo "shit";
+}
+else {
+  echo "無商品在購物車唷！";
 }
 
  ?>
