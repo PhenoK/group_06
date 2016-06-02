@@ -34,3 +34,10 @@ body {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: rgba(66, 66, 66, 0.08);
 }
+
+.total_price {
+  color: rgba(173, 55, 55, 0.85);
+  text-decoration: underline;
+  font-size: 1.2em;
+  font-weight: bold;
+}

@@ -29,6 +29,7 @@
 <!-- jQuery -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script> -->
+<script src="../js/js.cookie.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <!-- Latest compiled and minified JavaScript -->
