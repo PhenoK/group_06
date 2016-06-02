@@ -116,7 +116,7 @@ switch (@$_GET['p_type']) {
                 <?php
                 include "cartAddRemove.php";
                 ?>
-                <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
+                <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
                 <h4 class="pull-right">79折 特價<?=$row['price'] ?>元</h4>
               </div>
             </div>

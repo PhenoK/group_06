@@ -14,11 +14,11 @@ function cart(add_remove, id, price) {
       // 依據取得(從主頁面product.php)的id判斷
       // 物品已在購物車
       if (jQuery.inArray(id.toString(), Jdata) >= 0){
-          $("#p" + id).html("<i class=\"fa fa-shopping-cart fa-fw\"></i> 取消購物車");
+          $("#p" + id).html("<i class=\"fa fa-cart-arrow-down fa-fw\"></i> 取消購物車");
           $("#p" + id).attr("onclick", "cart(2," + id + "," + price + ")");
       }
       else {
-          $("#p" + id).html("<i class=\"fa fa-shopping-cart fa-fw\"></i> 加入購物車");
+          $("#p" + id).html("<i class=\"fa fa-cart-plus fa-fw\"></i> 加入購物車");
           $("#p" + id).attr("onclick", "cart(1, "+ id + "," + price + ")");
       }
       // 因為回傳的還有購物車總金額，故實際購物車品項數量還要再少1

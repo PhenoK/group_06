@@ -14,7 +14,7 @@
 <!-- Custom SB-Admin2 CSS -->
 <link href="../css/sb-admin-2.css" rel="stylesheet">
 <!-- Custom Fonts -->
-<link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 <!-- Custom Shop-Homepage CSS -->
 <link href="../css/shop-homepage.css" rel="stylesheet">
 <!-- group_06 css -->
@@ -28,9 +28,12 @@
 
 <!-- jQuery -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script> -->
+
 <!-- Bootstrap Core JavaScript -->
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../js/sb-admin-2.js"></script>
 <script src="../js/metisMenu.js"></script>
+<script src="https://use.fontawesome.com/f596ee0ee0.js"></script>

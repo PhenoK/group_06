@@ -118,7 +118,7 @@ if ($result = mysqli_query($link, $sql)){
               <span class="fa fa-star-half-o"></span>
             </p>
             <?php include "cartAddRemove.php"; ?>
-            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
+            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
           </div>
         </div>
         <!-- div item img -->
