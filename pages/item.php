@@ -32,6 +32,9 @@ else
         $row = mysqli_fetch_assoc($result);
     }
 
+    $result_rank=mysqli_query($link,"SELECT * FROM product_review WHERE product_id='$id'");
+    $review_num=mysqli_num_rows($result_rank);
+
 ?>
 
         <head>
@@ -97,31 +100,6 @@ else
                     });
 
                 });
-                </script>
-                <script type="text/javascript">
-                    /*var msg_edit=function(){
-                    var time=$("#msg_time").text();
-                        $.ajax({
-                                url : "msg_del.php",
-                                data : {msg_time:time},
-                                type : "POST",
-                                dataType : "text",
-                                error : function(){
-                                     alert("刪除失敗");
-                                },
-                                success : function(){
-                                     $("#msg_area").load('msgarea.php');
-                                     alert("成功");
-                                }
-                        });
-                    }*/
-                    $(document).ready(function() {
-                        $(".edit").click(function() {
-                            var index=$(this).val();
-                            $('textarea').eq(index).removeAttr("readonly");
-                            alert(index);
-                        });
-                    });
                 </script>
 
                 <style>
@@ -215,7 +193,7 @@ else
           </div>
           <br />
           <div class="ratings">
-            <p class="pull-right"><?=$row['rank'] ?> 則評論</p>
+            <p class="pull-right"><?=$review_num ?> 則評論</p>
             <p>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
@@ -276,11 +254,9 @@ else
 
           
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="msgarea.php">   
-            </iframe>
-          
-          
-      
+            <iframe src="msgarea.php?page=1&id=<?=$id?>">   
+            </iframe>        
+          </div>
 
     </div>
     <!-- /#wrapper -->
