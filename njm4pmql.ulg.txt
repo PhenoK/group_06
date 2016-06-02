@@ -1,0 +1,24 @@
+﻿購物車、訂單table的總購買價格客製化（total_price）。另外增加jquery-cookie的檔案，增加在head的引入，以後可使用js操作cookie
+https://github.com/js-cookie/js-cookie
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   ../css/group_06.css
+#	new file:   ../js/js.cookie.js
+#	modified:   head.php
+#
+# Changes not staged for commit:
+#	deleted:    ../0txpjriq.jtv.txt
+#	deleted:    ../mndynqd5.hng.txt
+#	modified:   shoppingCart.php
+#	deleted:    ../suo5gvxc.ogt.txt
+#	deleted:    ../yvsgz3uj.f5s.txt
+#
+# Untracked files:
+#	cartCheckout_ajax.php
+#	shoppingList.php
+#
+
