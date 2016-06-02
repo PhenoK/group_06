@@ -1,9 +1,9 @@
 <?php
 include_once 'initial.php';
 include_once 'connect.php';
-// if (!$logged){
-//   header('Location: signIn.php');
-// }
+if (!$logged){
+  header('Location: signIn.php');
+}
 
 // 取出購物車
 if (isset($_COOKIE['cart'])){
@@ -23,25 +23,17 @@ $arr_cart = array_filter(explode(",", $cart));
   <?php include 'head.php'; ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-  <style>
-    #total_price {
-      color: rgba(173, 55, 55, 0.85);
-      text-decoration: underline;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-  </style>
   <script>
     $(document).ready(function() {
       setTotalPrice();
 
       // 下拉式選單商品購買數量
       for (var j = 1; j <= 30; ++j){
-        $('.cnt_item').append($('<option></option>').html(j).val(j));
+        $('.quantity').append($('<option></option>').html(j).val(j));
       }
 
       // 若商品數量改變，小計數量也得改變
-      $('.cnt_item').change(function(){
+      $('.quantity').change(function(){
         // 取得選取數量
         var num = this.options[this.selectedIndex].text;
         // 取得該select是第幾個select（哪個商品的select）
@@ -97,8 +89,55 @@ $arr_cart = array_filter(explode(",", $cart));
         for (var i = 0; i < $('.item_total_price').length; ++i){
           total += parseInt($('.item_total_price').eq(i).text());
         }
-        $("#total_price").text(total);
+        $(".total_price").text(total);
       }
+
+      $('#checkout').on('click', function(){
+        // 計算有幾件購物車品項
+        var cnt_cart = $(".p_id").size();
+        if (cnt_cart == 0){
+          alert("無商品在購物車唷！");
+          return;
+        }
+        // 商品id
+        var arr_pId = new Array(cnt_cart);
+        // 商品選擇總價
+        var arr_tPrice = new Array(cnt_cart);
+        // 商品選擇數量
+        var arr_quan = new Array(cnt_cart);
+
+        for (var i = 0; i < cnt_cart; ++i){
+          arr_pId[i] = $(".p_id").eq(i).text();
+          arr_tPrice[i] = $(".item_total_price").eq(i).text();
+          // 我不知道為何數量的class要從1開始數…
+          // 啊我知道ㄌ，在select使用selectpicker的class還有自己的quantity class，會自動生成一個class="selectpicker quantity"的div
+          // 裏頭子元素的select又有一模一樣的class...
+          arr_quan[i] = $(".quantity").eq(i * 2 + 1).val();
+        }
+        var account = "<?=$_SESSION['user'] ?>";
+        var idx =
+        $.ajax({
+          url: 'cartCheckout_ajax.php',
+          data: {
+            arr_pId: arr_pId,
+            arr_tPrice: arr_tPrice,
+            arr_quan: arr_quan,
+            account: account
+          },
+          type: 'POST',
+          dataType: "text",
+          success: function(text) {
+            // 刪除購物車品項與購物車總金額的cookie
+            Cookies.remove('cart', { path: ''});
+            Cookies.remove('cart_price', { path: ''});
+            alert(text);
+            window.location = 'shoppingList.php?account=<?=$_SESSION['user'] ?>';
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert("生成訂單失敗！");
+          }
+        });
+      });
     });
 
 
@@ -124,7 +163,6 @@ $arr_cart = array_filter(explode(",", $cart));
       <!-- shopping cart Row -->
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <form name="cart_list" method="post" action="">
           <table id="cart" class="table table-hover table-condensed table-bordered table-striped">
             <thead>
               <tr>
@@ -159,7 +197,8 @@ $arr_cart = array_filter(explode(",", $cart));
                 echo "<td>";
                 $tmp = $i + 1;
                 $price = $row['price'];
-                echo "<select name=\"cnt_item[]\" class=\"selectpicker cnt_item\" data-width=\"fit\" data-style=\"btn-default\" data-live-search=\"true\"></select>";
+                // 有很多個購物車品項數量select，因此name用陣列
+                echo "<select class=\"selectpicker quantity\" data-width=\"fit\" data-style=\"btn-default\" data-live-search=\"true\"></select>";
                 echo "</td>";
                 // 小計
                 echo "<td class=\"item_total_price\">" . $row['price'] * 1 . "</td>";
@@ -174,12 +213,11 @@ $arr_cart = array_filter(explode(",", $cart));
             <tfoot>
               <tr>
                 <td colspan="6" class="alert alert-info" role="alert">總金額</td>
-                <td id="total_price"></td>
-                <td><button type="submit" value="結帳" class="btn btn-danger"><i class="fa fa-shopping-basket"></i> 結帳</button></td>
+                <td class="total_price" name="sum"></td>
+                <td><button id="checkout" class="btn btn-danger"><i class="fa fa-shopping-basket"></i> 結帳</button></td>
               </tr>
             </tfoot>
           </table>
-          </form>
         </div>
       </div>
       <!-- shopping cart Row -->
