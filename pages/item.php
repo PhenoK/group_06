@@ -3,47 +3,153 @@ include_once 'initial.php';
 
 // 若url沒有傳入商品id，將導向至首頁
 if (!isset($_GET['id'])){
-  header('Location: index.php');
+    header('Location: index.php');
 }
- ?>
+
+if(@$_GET['page'])
+    $page=$_GET['page'];
+else
+    $page=1;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include_once 'connect.php';
-// 先從product table該id的資料中找出是哪一type(因為GET沒有傳type)
-$id = @$_GET['id'];
-$sql = "SELECT * FROM product WHERE id=$id";
+    include_once 'connect.php';
+    // 先從product table該id的資料中找出是哪一type(因為GET沒有傳type)
+    $id = @$_GET['id'];
+    $sql = "SELECT * FROM product WHERE id=$id";
 
-if ($result = mysqli_query($link, $sql)){
-  $row = mysqli_fetch_assoc($result);
-  $tb = $row['type'];
-  // free memory
-  mysqli_free_result($result);
-}
-// 利用product id與type id兩資料表結合成一資料表
-$sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id WHERE product.id=$id";
-if ($result = mysqli_query($link, $sql)){
-  $row = mysqli_fetch_assoc($result);
-}
+    if ($result = mysqli_query($link, $sql)){
+        $row = mysqli_fetch_assoc($result);
+        $tb = $row['type'];
+        // free memory
+        mysqli_free_result($result);
+    }
+    // 利用product id與type id兩資料表結合成一資料表
+    $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id WHERE product.id=$id";
+    if ($result = mysqli_query($link, $sql)){
+        $row = mysqli_fetch_assoc($result);
+    }
 
 ?>
-<head>
-  <!-- title:商品名稱 -->
-  <title><?=$row['name'] ?></title>
-  <?php include 'head.php'; ?>
-</head>
 
-<body>
-  <div id="wrapper">
-    <?php include 'navbarTop.php'; ?>
-    <?php include 'navbarSide.php'; ?>
+        <head>
+            <!-- title:商品名稱 -->
+            <title>
+                <?=$row['name'] ?>
+            </title>
+            <?php include 'head.php'; ?>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+            <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+            <script type="text/javascript"  src="additional-methods.min.js"></script>
+                <script>
+                $(document).ready(function($) {
 
-    <div id="page-wrapper">
-      <!-- Page Header -->
-      <div class="row">
-        <div class="col-sm-12 col-lg-12 col-md-12">
-          <blockquote>
-            <h3 class="page-header"><?=$row['name'] ?></h1>
+                    jQuery.validator.addMethod("none", function(value, element) {
+                        return value.split(" ").length - 1 < value.length;
+                    }, "請勿輸入空白內容");
+
+                    $("#form_msg").validate({
+                        submitHandler: function(form) {
+
+                            $(form).ajaxSubmit({
+                                type: "POST",
+                                url: "send_msg.php",
+                                dataType: "text",
+                                data: $('#form_msg').serialize(),
+
+                            });
+
+                        },
+
+                        errorPlacement: function(error, element) {
+
+                            if (element.is(':radio') || element.is(':checkbox')) {
+                                var eid = element.attr('name');
+                                $('input[name=' + eid + ']:last').next().after(error);
+                            } else {
+                                error.insertAfter(element);
+                            }
+                        },
+
+
+
+                        rules: {
+
+                            message: {
+
+                                none: true,
+                                required: true,
+
+                            }
+
+                        },
+
+                        messages: {
+
+                            message: {
+                                required: "請輸入留言",
+                            }
+
+                        }
+
+                    });
+
+                });
+                </script>
+                <script type="text/javascript">
+                    /*var msg_edit=function(){
+                    var time=$("#msg_time").text();
+                        $.ajax({
+                                url : "msg_del.php",
+                                data : {msg_time:time},
+                                type : "POST",
+                                dataType : "text",
+                                error : function(){
+                                     alert("刪除失敗");
+                                },
+                                success : function(){
+                                     $("#msg_area").load('msgarea.php');
+                                     alert("成功");
+                                }
+                        });
+                    }*/
+                    $(document).ready(function() {
+                        $(".edit").click(function() {
+                            var index=$(this).val();
+                            $('textarea').eq(index).removeAttr("readonly");
+                            alert(index);
+                        });
+                    });
+                </script>
+
+                <style>
+                #section1 {
+                    height: 50px; // Set this height to the appropriate size
+                    overflow-y: scroll; // Only add scroll to vertical column
+                }
+                
+                textarea {
+                    resize: none;
+                }
+                
+                pre {
+                    margin-bottom: 5px;
+                }
+                </style>
+        </head>
+
+        <body>
+            <div id="wrapper">
+                <?php include 'navbarTop.php'; ?>
+                <?php include 'navbarSide.php'; ?>
+                <div id="page-wrapper">
+                    <!-- Page Header -->
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            <blockquote>
+                                <h3 class="page-header"><?=$row['name'] ?></h1>
           </blockquote>
         </div>
       </div>
@@ -118,7 +224,7 @@ if ($result = mysqli_query($link, $sql)){
               <span class="fa fa-star-half-o"></span>
             </p>
             <?php include "cartAddRemove.php"; ?>
-            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
+            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
           </div>
         </div>
         <!-- div item img -->
@@ -130,31 +236,51 @@ if ($result = mysqli_query($link, $sql)){
       <!-- Product Row -->
 
       <pre><?=mb_substr($row['content'], 0, strlen($row['content']))?></pre>
-      <div class="well">
-        <div class="text-right">
-          <a class="btn btn-success">留言</a>
-        </div>
 
-        <hr>
+    <!-- Comment -->
+    
 
-        <div class="row">
-          <div class="col-md-12">
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star-o"></span> 匿名
-            <span class="pull-right">10 天前</span>
-            <p>場景好漂亮喔</p>
-          </div>
-        </div>
+    <div class="well">
+       
+          <form method="POST" role="form" name="form_msg" id="form_msg" action="send_msg.php?id=<?=$id?>">
+            <div class="row">
+                <div class="form-group">
+                    <?php
+                        if(isset($_SESSION['user'])){
+                            echo "
+                                <div class='col-md-10'>
+                                    <textarea  name='message' id='message' rows='5' class='form-control'></textarea>            
+                                </div>";
+                        }
+                        else{
+                            echo "
+                                <div class='col-md-10 text-center'>
+                                    <pre style='margin:14px;'>請先登入以進行留言</pre>           
+                                </div>";
+                        }
+                    ?>
+                </div>    
+                
+                <div class="col-md-2 text-right">
+                    <?php 
+                        if(isset($_SESSION['user'])) 
+                            echo"<button type='submit' class='btn btn-success' >留言</button>";
+                        else
+                            echo "<a class='btn btn-success' href='signIn.php'>登入</a>";
+                    ?>
+                </div>
+            </div>
+          </form>
+              
+          <hr>
 
-        <hr>
-
-      </div>
-
-
-      </div>
+          
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="msgarea.php">   
+            </iframe>
+          
+          
+      
 
     </div>
     <!-- /#wrapper -->
