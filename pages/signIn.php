@@ -104,7 +104,7 @@ if (isset($_POST['account'])){
     $row = mysqli_fetch_assoc($result);
     // 設定使用者等級session
     $_SESSION['level'] = $row['level'];
-    header('Location: index.php');
+    echo " <script language='JavaScript'>history.go(-2);</script>";
   }
 }
 
@@ -118,12 +118,14 @@ if (isset($_GET['action'])){
     // 解除session
     unset($_SESSION['user']);
     unset($_SESSION['level']);
-    header("Location: index.php");
+    echo " <script language='JavaScript'>history.go(-1);</script>";
   }
 }
 else if (isset($_SESSION['user'])){
   // 若來到此網頁，但已有session狀態，導向到首頁
-  header("Location: index.php");
+  echo " <script language='JavaScript'>history.go(-1);</script>";
+
+  // 可是!!登入成功後，無法回到登入前的頁面，似乎是if流程來到原本導向首頁的此處
 }
 ?>
 
