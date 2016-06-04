@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">元經樵屋頂拍賣</a>
+        <img class="pull-left" src="../images/favicon.ico" /><a class="navbar-brand" href="index.php">元經樵屋頂拍賣</a>
     </div>
     <!-- /.navbar-header -->
     <ul class="nav navbar-top-links navbar-right">

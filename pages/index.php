@@ -49,14 +49,19 @@ include_once('connect.php');
 
         <?php
         for ($panel_i = 1; $panel_i <= 2; ++$panel_i){
+          if ($panel_i == 1)
+            $panel_type = "bolt";
+          else
+            $panel_type = "eye";
+
           // panel-title
           if ($panel_i == 1){
-            $p_tp = "danger";
+            $p_tp = "red";
             $p_tit = "熱門商品";
             $sql = "SELECT * FROM product ORDER BY sales DESC LIMIT 3";
           }
           else {
-            $p_tp = "success";
+            $p_tp = "green";
             $p_tit = "最新商品";
             $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 3";
           }
@@ -65,7 +70,7 @@ include_once('connect.php');
             <div class="col-md-12 col-sm-12 col-lg-12">
               <div class="panel panel-<?=$p_tp ?>">
                 <div class="panel-heading">
-                  <h3 class="panel-title"><i class="fa fa-bolt fa-fw"></i> <?=$p_tit ?></h3>
+                  <h3 class="panel-title"><i class="fa fa-<?=$panel_type ?> fa-fw"></i> <?=$p_tit ?></h3>
                 </div>
                 <div class="panel-body">
                   <div class="row">
@@ -109,9 +114,10 @@ include_once('connect.php');
           <?php
         }
         ?>
-
       </div>
       <!-- total product row -->
+
+
     </div>
     <!-- page-wrapper -->
   </div>

@@ -1,10 +1,5 @@
 <?php
 include_once 'initial.php';
-
-// 若url沒有傳入商品type，將導向至首頁
-// if (!isset($_GET['p_type'])){
-//   header('Location: index.php');
-// }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,11 +97,45 @@ else {
       <?php
         // 利用product id與type id兩資料表結合成一資料表
         $tb = $get_p_type;
-        if ($tb != 'book'){
-          $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id";
+
+        // 不管怎樣都要檢查item_name的存在，畢竟有平常非使用搜尋功能的可能
+        if (isset($_GET['item_name'])){
+          $item_name = $_GET['item_name'];
         }
         else {
-          $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id WHERE $tb.lang = '$lang_type' AND $tb.category = '$b_type'";
+          $item_name = "";
+        }
+
+        // 檢查price_min, max
+        if (isset($_GET['price_min'])){
+          $price_min = intval($_GET['price_min']);
+          $price_max = intval($_GET['price_max']);
+        }
+        else {
+          $price_min = 0;
+          $price_max = 99999;
+        }
+
+
+        // 若有接受到任何搜尋商品的資訊
+        if (isset($_GET['price_min'])){
+          $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
+          WHERE (name LIKE '%$item_name%')
+          AND (price BETWEEN $price_min AND $price_max)";
+        }
+        else {
+          if ($tb != 'book'){
+            $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
+            WHERE (name LIKE '%$item_name%)'
+            AND (price BETWEEN $price_min AND $price_max)";
+          }
+          else {
+            $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
+            WHERE $tb.lang = '$lang_type'
+            AND $tb.category = '$b_type'
+            AND (name LIKE '%$item_name%)'
+            AND (price BETWEEN $price_min AND $price_max)";
+          }
         }
 
         if ($result = mysqli_query($link, $sql)){
@@ -114,7 +143,7 @@ else {
           $tb_rec = mysqli_num_rows($result);
           // 若沒資料就不用顯示了
           if ($tb_rec == 0){
-            die("目前尚無商品資料唷！");
+            die("尚無商品資料或查詢結果唷！");
           }
           // 每一頁有幾筆
           $per = 5;
@@ -143,6 +172,9 @@ else {
           mysqli_data_seek($result, $offset);
           for ($i = 1; $i <= $per; ++$i){
             $row = mysqli_fetch_assoc($result);
+            if ($row == null){
+              break;
+            }
             $id = $row['id'];
             ?>
             <div class="row">
@@ -184,7 +216,8 @@ else {
           mysqli_free_result($result);
         }
         else {
-          die("錯誤！");
+          $str_error = mysqli_error($link);
+          die($str_error);
         }
        ?>
       </div>
@@ -201,17 +234,19 @@ else {
             else {
               $get_book_href = "";
             }
+            $get_price_href = "&price_min=$price_min&price_max=$price_max";
+
             // 回到第一頁、上一頁的超連結
             if ($cur_page > 1){
               $prev_page = $cur_page - 1;
               ?>
             <li>
-              <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=1>
+              <a href=?p_type=<?=$tb ?><?=$get_book_href ?><?=$get_price_href ?>&item_name<?=$item_name ?>&page=1>
                 <i class="fa fa-angle-double-left"></i>
               </a>
             </li>
             <li>
-              <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$prev_page ?>>
+              <a href=?p_type=<?=$tb ?><?=$get_book_href ?><?=$get_price_href ?>&item_name<?=$item_name ?>&page=<?=$prev_page ?>>
                 <i class="fa fa-angle-left"></i>
               </a>
             </li>
@@ -226,7 +261,7 @@ else {
               else {
                 echo "<li>";
               }
-                echo "<a href=?p_type=$tb". "$get_book_href&page=$i> $i </a>";
+                echo "<a href=?p_type=$tb" . "$get_book_href" . "$get_price_href&item_name=$item_name" . "&page=$i> $i </a>";
                 echo "</li>";
             }
             // 下一頁、最後一頁
@@ -234,12 +269,12 @@ else {
               $next_page = $cur_page + 1;
               ?>
               <li>
-                <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$next_page ?>>
+                <a href=?p_type=<?=$tb ?><?=$get_book_href ?><?=$get_price_href ?>&item_name<?=$item_name ?>&page=<?=$next_page ?>>
                   <i class="fa fa-angle-right"></i>
                 </a>
               </li>
               <li>
-                <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$total_pages ?>>
+                <a href=?p_type=<?=$tb ?><?=$get_book_href ?><?=$get_price_href ?>&item_name<?=$item_name ?>&page=<?=$total_pages ?>>
                   <i class="fa fa-angle-double-right"></i>
                 </a>
               </li>
