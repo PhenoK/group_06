@@ -107,7 +107,7 @@ else {
         }
 
         // 檢查price_min, max
-        if (isset($_GET['price_min'])){
+        if (isset($_GET['price_min']) && isset($_GET['price_max'])){
           $price_min = intval($_GET['price_min']);
           $price_max = intval($_GET['price_max']);
         }
@@ -131,13 +131,12 @@ else {
           }
           else {
             $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
-            WHERE $tb.lang = '$lang_type'
-            AND $tb.category = '$b_type'
-            AND (name LIKE '%$item_name%)'
+            WHERE ($tb.lang = '$lang_type')
+            AND ($tb.category = '$b_type')
+            AND (name LIKE '%$item_name%')
             AND (price BETWEEN $price_min AND $price_max)";
           }
         }
-
         if ($result = mysqli_query($link, $sql)){
           // 取出資料數
           $tb_rec = mysqli_num_rows($result);
