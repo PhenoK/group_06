@@ -23,7 +23,7 @@
 		
 		
 		$result=mysqli_query($link,$sql);
-
+		mysqli_free_result($result);
 		echo " <script language='JavaScript'>history.go(-1);</script>";
 		
 	}
