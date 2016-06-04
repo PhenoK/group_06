@@ -15,6 +15,7 @@
 <link href="../css/sb-admin-2.css" rel="stylesheet">
 <!-- Custom Fonts -->
 <!-- <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- Custom Shop-Homepage CSS -->
 <link href="../css/shop-homepage.css" rel="stylesheet">
 <!-- group_06 css -->
@@ -37,4 +38,3 @@
 <!-- Custom Theme JavaScript -->
 <script src="../js/sb-admin-2.js"></script>
 <script src="../js/metisMenu.js"></script>
-<script src="https://use.fontawesome.com/f596ee0ee0.js"></script>
