@@ -9,27 +9,6 @@
     ?>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script type="text/javascript"  src="additional-methods.min.js"></script>
-    <!--<script type="text/javascript">
-        var msg_del=function(){
-        var time=$("#msg_time").text();
-        var page=$("#cur").text();
-        var id=$("#msg_del").val();
-            $.ajax({
-                    url : "msg_del.php",
-                    data : {msg_time:time},
-                    type : "POST",
-                    dataType : "text",
-                    error : function(){
-                         alert("刪除失敗");
-                    },
-                    success : function($re){
-                         $(".msg_area").load("msgarea.php?page="+page+"&id="+id);
-                         alert($re);
-                    }
-            });
-        }
-        
-    </script>-->
 
     <script>
     $(document).ready(function($) {
@@ -50,9 +29,6 @@
                 });
 
             },
-
-            
-
 
 
             rules: {
@@ -82,55 +58,23 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            /*$(".update").click(function() {
-    
-                var page=$("#cur").text();
-                var index_time = $(this).val()*8;
-                var time = $('span').eq(index_time-7).text();
-                var index_text=$(this).val();
-                var id=$(this).get(0).id;
-                var text=$('textarea').eq(index_text-6).text();
-    
-                $.ajax({
-                            url : "msg_up.php",
-                            data : {msg_time:time,newmsg:text},
-                            type : "POST",
-                            dataType : "text",
-
-                            beforeSend:function(){
-                                //var text=$('.txt'+index).text();
-                                alert(text);
-                            },
-                            error : function(){
-                                alert("修改失敗");
-                            },
-                            success : function($result){
-                                $(".msg_area").load("msgarea.php?page="+page+"&id="+id);
-                                alert($result);
-                            }
-                });
-                
-            });*/
-
-
-
-
+           
             $(".delete").click(function() {
 
                 var page=$("#cur").text();
                 var index = $(this).val()*8;
                 var time = $('span').eq(index-7).text();
-                var acc = $('span').eq(index-1);
+                var acc = $('span').eq(index-1).text();
                 var id=$(this).get(0).id;
 
                 $.ajax({
                             url : "msg_del.php",
-                            data : {msg_time:time},
+                            data : {msg_time:time,acc:acc},
                             type : "POST",
                             dataType : "text",
                             /*beforeSend:function(){
                                 var text=$('.txt'+index).text();
-                                alert(time);
+                                alert(acc);
                             },*/
                             error : function(){
                                 alert("刪除失敗");
@@ -192,72 +136,97 @@
         {
 
             $total_records=mysqli_num_rows($result);
-            $total_page=ceil($total_records/5);
+            if($total_records!=0)
+            {
+                $total_page=ceil($total_records/5);
 
-            mysqli_data_seek($result,($page-1)*5);
-            
-            echo"<div class='msg_area'>";
-            for($i=1;$i<=5;$i++){
-                if($row = mysqli_fetch_assoc($result)){
-    
-                    $acc=$row['account'];
-                    $res_nick=mysqli_query($link, "SELECT nickname FROM member WHERE '$acc'=account");
-                    $row_nick=mysqli_fetch_assoc($res_nick);
-                    $nickname=$row_nick['nickname'];
-                    $time=$row['time'];
-                    $text=$row['text'];
-                    echo"
-                        
-                            <div class='col-md-12'>
-                                <div class='row'>
-                                    <span> 發表留言時間: </span><span id='msg_time' >".$time."</span> 評價:
-                                    <span class='fa fa-star'></span>
-                                    <span class='fa fa-star'></span>
-                                    <span class='fa fa-star'></span>
-                                    <span class='fa fa-star'></span>
-                                    <span class='fa fa-star-o'></span> 留言者帳號:<span>".$acc."</span> 暱稱: ".$nickname
-                            
-                            
-                        ;
-
-                    if($acc==@$_SESSION['user'])
+                mysqli_data_seek($result,($page-1)*5);
+                
+                echo"<div class='msg_area'>";
+                for($i=1;$i<=5;$i++)
+                {
+                    if($row = mysqli_fetch_assoc($result))
                     {
-                        echo "
-                                        <div class='pull-right' style='margin-bottom:10px;'>
-                                            <button type='button' class='btn btn-danger delete' value='".$i."' id='".$id."' >刪除</      button>
-                                            <button class='btn btn-warning edit' type='button' value='".$i."' >編輯</button>
-                                            
+                        
+                        $acc=$row['account'];
+                        $res_nick=mysqli_query($link, "SELECT nickname FROM member WHERE '$acc'=account");
+                        $acc_log=@$_SESSION['user'];
+                        $result_lv=mysqli_query($link, "SELECT level FROM member WHERE '$acc_log'=account");
+                        $res_level=mysqli_fetch_assoc($result_lv);
+                        $res_lv=$res_level['level'];
+                        $row_nick=mysqli_fetch_assoc($res_nick);
+                        $nickname=$row_nick['nickname'];
+                        $time=$row['time'];
+                        $text=$row['text'];
+                        echo"
+                            
+                                <div class='col-md-12'>
+                                    <div class='row'>
+                                        <span> 發表留言時間: </span><span id='msg_time' >".$time."</span> 評價:
+                                        <span class='fa fa-star'></span>
+                                        <span class='fa fa-star'></span>
+                                        <span class='fa fa-star'></span>
+                                        <span class='fa fa-star'></span>
+                                        <span class='fa fa-star-o'></span> 留言者帳號:<span>".$acc."</span> 暱稱: ".$nickname
+                                        ."";
+
+                        if($acc==@$_SESSION['user'])
+                        {
+                            echo "
+                                            <div class='pull-right' style='margin-bottom:10px;'>
+                                                <button type='button' class='btn btn-danger delete' value='".$i."' id='".$id."' >刪除</      button>
+                                                <button class='btn btn-warning edit' type='button' value='".$i."' >編輯</button>
+                                                
+                                            </div>
                                         </div>
-                                    </div>
-                                    <form role='form' class='rdoy' id='content' method='POST' action='msg_up.php'>
-                                        <textarea readonly='true' class='form-control txt".$i."' name= 'message' id='accessable' style='background-color:white; margin-bottom:10px; '>".$text."</textarea>
-                                        <button class='btn btn-warning update hide' id='".$id."' type='submit' value='".$i."' >修改完成</button>
-                                        <input type='hidden' name='time' value='".$time."' ></input>
-                                    </form> 
-                                </div>  
-                            ";//onclick='msg_edit()' pointer-events: none;
+                                        <form role='form' class='rdoy' id='content' method='POST' action='msg_up.php'>
+                                            <textarea readonly='true' class='form-control txt".$i."' name= 'message' id='accessable' style='background-color:white; margin-bottom:10px; '>".$text."</textarea>
+                                            <button class='btn btn-warning update hide' id='".$id."' type='submit' value='".$i."' >修改完成</button>
+                                            <input type='hidden' name='time' value='".$time."' ></input>
+                                        </form> 
+                                    </div>  
+                                ";//onclick='msg_edit()' pointer-events: none;
+                        }
+                        else if($res_lv==2)
+                        {
+                            echo "
+                                            <div class='pull-right' style='margin-bottom:10px;'>
+                                                <button type='button' class='btn btn-danger delete' value='".$i."' id='".$id."' >刪除</button>                                       
+                                            </div>
+                                        </div>
+                                        <form role='form' class='rdoy' id='content' method='POST' action='msg_up.php'>
+                                            <textarea readonly='true' class='form-control txt".$i."' name= 'message' id='accessable' style='background-color:white; margin-bottom:10px; '>".$text."</textarea>
+                                            <input type='hidden' name='time' value='".$time."' ></input>
+                                        </form> 
+                                    </div>  
+                                ";
+                        }
+                        else
+                        {
+                            echo "
+                                            </div>
+                                        <textarea readonly='true' class='form-control'  style='background-color:white;'>".$text."</textarea>
+                                    </div> 
+                                ";
+                        }
+                        
                     }
                     else
                     {
-                        echo "
-                                        </div>
-                                    <textarea readonly='true' class='form-control'  style='background-color:white;'>".$text."</textarea>
-                                </div> 
-                            ";
+                        break;
                     }
-                    
                 }
-                else
-                  break; 
             }
 
             mysqli_free_result($result);
         }
 
-        else
+        if($total_records==0)
         {
-            echo" 123456";
+            echo "<h2>目前尚無商品留言</h2>";
         }
+        
+
 
     ?>
 
@@ -265,13 +234,17 @@
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
         <div class="text-center">
             <?php
-                for($i=1;$i<=$total_page;$i++)
+                if($total_records!=0)
                 {
-                    if($i==$page)
-                        echo"<a class='btn btn-primary' id='cur'>".$i."</a>";
-                    else
-                        echo "<a class='btn btn-info'"."href='msgarea.php?page=".$i."&id=".$id."'>".$i."</a>";
+                    for($i=1;$i<=$total_page;$i++)
+                    {
+                        if($i==$page)
+                            echo"<a class='btn btn-primary' id='cur'>".$i."</a>";
+                        else
+                            echo "<a class='btn btn-info'"."href='msgarea.php?page=".$i."&id=".$id."'>".$i."</a>";
+                    }
                 }
+                
     
             ?>
         </div>

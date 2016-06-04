@@ -52,6 +52,8 @@ if ($logged){
                     return this.optional(element) || /^[0-9]+$/.test(value);
                 }, "只能輸入數字");
 
+
+
                 $("#form_sU").validate({
                     submitHandler: function(form) {
                         alert("註冊成功!");
@@ -285,7 +287,7 @@ if ($logged){
                                                         <label for="birth">生日</label>
                                                     </td>
                                                     <td>
-                                                        <input type="ptext" class="form-inline col-md-4 col-md-offset-1" id="birth" name="birth" placeholder="例:1999/09/01">
+                                                        <input type="text" class="form-inline col-md-4 col-md-offset-1" id="birth" name="birth" placeholder="例:1999/09/01">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -309,7 +311,7 @@ if ($logged){
                                                         <label for="mail">電子郵件</label>
                                                     </td>
                                                     <td>
-                                                        <input type="mail" class="form-inline col-md-4 col-md-offset-1" id="mail" name="mail" placeholder="">
+                                                        <input type="text" class="form-inline col-md-4 col-md-offset-1" id="mail" name="mail" placeholder="">
                                                     </td>
                                                 </tr>
                                                 <tr>
