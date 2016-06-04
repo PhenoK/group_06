@@ -2,9 +2,9 @@
 include_once 'initial.php';
 
 // 若url沒有傳入商品type，將導向至首頁
-if (!isset($_GET['p_type'])){
-  header('Location: index.php');
-}
+// if (!isset($_GET['p_type'])){
+//   header('Location: index.php');
+// }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,58 @@ switch (@$_GET['p_type']) {
     $lab_type = "電玩遊戲";
     break;
   default:
+    $icon_type = "book";
+    $lab_type = "圖書";
     break;
+}
+if (!isset($_GET['p_type'])){
+  $get_p_type = 'book';
+}
+else {
+  $get_p_type = $_GET['p_type'];
+}
+
+
+switch (@$_GET['lang']) {
+  case 'tw':
+    $lang_type = "中文繁體";
+    break;
+  case 'en':
+    $lang_type = "英文";
+    break;
+  default:
+    $lang_type = "中文繁體";
+    break;
+}
+if (!isset($_GET['lang'])){
+  $get_lang_type = 'tw';
+}
+else {
+  $get_lang_type = $_GET['lang'];
+}
+
+switch (@$_GET['b_type']) {
+  case 'program':
+    $b_type = "程式設計";
+    break;
+  case 'psycho':
+    $b_type = "心理學總論";
+    break;
+  case 'health':
+    $b_type = "保健常識";
+    break;
+  case 'philo':
+    $b_type = "哲學總論";
+    break;
+  default:
+    $b_type = "程式設計";
+    break;
+}
+if (!isset($_GET['b_type'])){
+  $get_b_type = 'program';
+}
+else {
+  $get_b_type = $_GET['b_type'];
 }
 ?>
 <head>
@@ -50,8 +101,13 @@ switch (@$_GET['p_type']) {
       <div class="row">
       <?php
         // 利用product id與type id兩資料表結合成一資料表
-        $tb = @$_GET['p_type'];
-        $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id";
+        $tb = $get_p_type;
+        if ($tb != 'book'){
+          $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id";
+        }
+        else {
+          $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id WHERE $tb.lang = '$lang_type' AND $tb.category = '$b_type'";
+        }
 
         if ($result = mysqli_query($link, $sql)){
           // 取出資料數
@@ -127,6 +183,9 @@ switch (@$_GET['p_type']) {
           // free memory
           mysqli_free_result($result);
         }
+        else {
+          die("錯誤！");
+        }
        ?>
       </div>
       <!-- /. Product Row -->
@@ -136,17 +195,23 @@ switch (@$_GET['p_type']) {
         <div class="col-lg-12 col-sm-12 col-md-12">
           <ul class="pagination">
             <?php
+            if ($icon_type == 'book'){
+              $get_book_href = "&lang=$get_lang_type&b_type=$get_b_type";
+            }
+            else {
+              $get_book_href = "";
+            }
             // 回到第一頁、上一頁的超連結
             if ($cur_page > 1){
               $prev_page = $cur_page - 1;
               ?>
             <li>
-              <a href=?p_type=<?=$tb ?>&page=1>
+              <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=1>
                 <i class="fa fa-angle-double-left"></i>
               </a>
             </li>
             <li>
-              <a href=?p_type=<?=$tb ?>&page=<?=$prev_page ?>>
+              <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$prev_page ?>>
                 <i class="fa fa-angle-left"></i>
               </a>
             </li>
@@ -161,7 +226,7 @@ switch (@$_GET['p_type']) {
               else {
                 echo "<li>";
               }
-                echo "<a href=?p_type=$tb&page=$i> $i </a>";
+                echo "<a href=?p_type=$tb". "$get_book_href&page=$i> $i </a>";
                 echo "</li>";
             }
             // 下一頁、最後一頁
@@ -169,12 +234,12 @@ switch (@$_GET['p_type']) {
               $next_page = $cur_page + 1;
               ?>
               <li>
-                <a href=?p_type=<?=$tb ?>&page=<?=$next_page ?>>
+                <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$next_page ?>>
                   <i class="fa fa-angle-right"></i>
                 </a>
               </li>
               <li>
-                <a href=?p_type=<?=$tb ?>&page=<?=$total_pages ?>>
+                <a href=?p_type=<?=$tb ?><?=$get_book_href ?>&page=<?=$total_pages ?>>
                   <i class="fa fa-angle-double-right"></i>
                 </a>
               </li>
