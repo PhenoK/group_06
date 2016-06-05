@@ -190,10 +190,7 @@ if(!$logged)
                 padding: 1px;
             }
             
-            .panel-height {
-                height: 650px;
-                width: 950px;
-            }
+            
             
             .table-bordered > tbody > tr > td,
             .table-bordered > tfoot > tr > th {
