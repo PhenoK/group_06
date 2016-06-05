@@ -83,6 +83,7 @@
           <input type="reset" class="btn btn-danger" value="重設" />
           <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal"> 關閉 </button>
         </div>
+      </form>
     </div>
     <!-- panel-info -->
   </div>
