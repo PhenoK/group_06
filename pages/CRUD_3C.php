@@ -69,7 +69,7 @@
                               "name": "intro_img3"  
                            },{
                               "label": "商品介紹影片:",
-                              "name": "intro_vedio"
+                              "name": "intro_video"
                            }       
                       ]
                   } );
