@@ -122,7 +122,7 @@ include_once('connect.php');
                             </button>
                             <?php
                             // 若是管理員
-                            if ($_SESSION['level'] == 2){
+                            if (@$_SESSION['level'] == 2){
                               // 可下架商品
                               ?>
                               <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
