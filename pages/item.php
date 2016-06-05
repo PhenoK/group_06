@@ -21,6 +21,10 @@ else
     $sql = "SELECT * FROM product WHERE id=$id";
 
     if ($result = mysqli_query($link, $sql)){
+        // 若商品id不存在就導向回product.php
+        if (mysqli_num_rows($result) == 0) {
+          echo "<script>window.location = 'product.php'</script>";
+        }
         $row = mysqli_fetch_assoc($result);
         $tb = $row['type'];
         // free memory
@@ -37,6 +41,7 @@ else
 
 ?>
 
+<<<<<<< HEAD
         <head>
             <!-- title:商品名稱 -->
             <title>
@@ -76,33 +81,107 @@ else
                                 error.insertAfter(element);
                             }
                         },
+=======
+<head>
+    <!-- title:商品名稱 -->
+    <title>
+        <?=$row['name'] ?>
+    </title>
+    <?php include 'head.php'; ?>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script src="../js/jRate.js"></script>
 
+    <script type="text/javascript"  src="additional-methods.min.js"></script>
+        <script>
+        function delProduct(id){
+          if (!confirm("確定要刪除？")){
+              return false;
+          }
+          $.ajax({
+            url: 'delProduct_ajax.php',
+            data: {
+              p_id: id
+            },
+            type: 'POST',
+            dataType: "text",
+            success: function(text) {
+              if (text.indexOf("成功")){
+                alert(text);
+                window.location = 'product.php';
+              }
+              else {
+                alert(text);
+                return;
+              }
 
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              alert("刪除失敗！");
+            }
+          });
+        }
+        $(document).ready(function($) {
+            $('#jRate').jRate({
+              onChange: function(rating){
+                $('#change-rate-value').text("選取到評價：" + rating);
+              },
+              onSet: function(rating){
+                $('#set-rate-value').text("評價設定：" + rating);
+              },
+              rating : 3,
+              opacity: 0.7,
+              startColor: 'yellow',
+              endColor: 'red'
+            });
 
-                        rules: {
+            jQuery.validator.addMethod("none", function(value, element) {
+                return value.split(" ").length - 1 < value.length;
+            }, "請勿輸入空白內容");
 
-                            message: {
+            $("#form_msg").validate({
+                submitHandler: function(form) {
 
-                                none: true,
-                                required: true,
-
-                            }
-
-                        },
-
-                        messages: {
-
-                            message: {
-                                required: "請輸入留言",
-                            }
-
-                        }
+                    $(form).ajaxSubmit({
+                        type: "POST",
+                        url: "send_msg.php",
+                        dataType: "text",
+                        data: $('#form_msg').serialize(),
+>>>>>>> ae390f9bd8fe19edb573362baf3c03577f3b5a33
 
                     });
 
-                });
-                </script>
+                },
 
+                errorPlacement: function(error, element) {
+
+                    if (element.is(':radio') || element.is(':checkbox')) {
+                        var eid = element.attr('name');
+                        $('input[name=' + eid + ']:last').next().after(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+
+
+
+                rules: {
+
+                    message: {
+
+                        none: true,
+                        required: true,
+
+                    }
+
+                },
+
+                messages: {
+
+                    message: {
+                        required: "請輸入留言",
+                    }
+
+<<<<<<< HEAD
                 <style>
                 #section1 {
                     height: 50px; // Set this height to the appropriate size
@@ -141,14 +220,51 @@ else
         </div>
       </div>
       <!-- /.row -->
+=======
+                }
+
+            });
+
+        });
+        </script>
+
+        <style>
+        #section1 {
+            height: 50px; // Set this height to the appropriate size
+            overflow-y: scroll; // Only add scroll to vertical column
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        pre {
+            margin-bottom: 5px;
+        }
+        </style>
+</head>
+
+<body>
+    <div id="wrapper">
+      <?php include 'navbarTop.php'; ?>
+      <?php include 'navbarSide.php'; ?>
+      <div id="page-wrapper">
+          <!-- Page Header -->
+          <div class="row">
+              <div class="col-sm-12 col-lg-12 col-md-12">
+                  <blockquote>
+                      <h3 class="page-header"><?=$row['name'] ?></h1>
+                  </blockquote>
+              </div>
+          </div>
+          <!-- /.row -->
+>>>>>>> ae390f9bd8fe19edb573362baf3c03577f3b5a33
 
       <!-- Product Info Row -->
       <div class="row">
         <!-- div img -->
         <div class="col-sm-2 col-lg-2 col-md-2">
-          <a href="#_">
-            <img src="<?=$row['pre_img'] ?>" alt="" class="img-thumbnail">
-          </a>
+          <img src="<?=$row['pre_img'] ?>" alt="" class="img-thumbnail">
         </div>
         <!-- div content -->
         <div class="col-sm-4 col-lg-4 col-md-4">
@@ -197,34 +313,87 @@ else
                    <i class="fa fa-usd fa-fw"></i><b class="dis"><?=$row['price'] ?></b>
                  </span>
                </li>
+              <div class="ratings pull-right">
+                <p><?=$review_num ?> 則評論</p>
+                <div id="jRate"></div>
+                <span id="change-rate-value" style="color:rgb(205, 195, 55)"></span>
+                <br />
+                <span id="set-rate-value" style="color:rgb(244, 156, 6)"></span>
+              </div>
             </ul>
-
           </div>
           <br />
-          <div class="ratings">
-            <p class="pull-right"><?=$review_num ?> 則評論</p>
-            <p>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star-half-o"></span>
-            </p>
-            <?php include "cartAddRemove.php"; ?>
-            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)"><i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i></button>
-          </div>
+          <?php include "cartAddRemove.php"; ?>
+          <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
+            <i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
+          </button>
+          <?php
+          // 若是管理員
+          if (@$_SESSION['level'] == 2){
+            // 可下架商品
+            ?>
+            <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
+              <i class="fa fa-trash fa-fw"></i> 刪除商品<i class="fa"></i>
+            </button>
+            <?php
+          }
+           ?>
         </div>
-        <!-- div item img -->
         <div class="col-sm-6 col-lg-6 col-md-6">
-          放畫廊
+            <!-- amazingcarousel container -->
+            <div id="amazingcarousel-container-1">
+                <div id="amazingcarousel-1" style="display:block;position:relative;width:100%;max-width:720px;margin:0px auto 0px;">
+                    <div class="amazingcarousel-list-container">
+                        <ul class="amazingcarousel-list">
+                          <?php
+                            for ($img_idx = 1; $img_idx <= 3; ++$img_idx){
+                              $img_offset = 'intro_img' . $img_idx;
+                              $img_src = $row[$img_offset];
+                              if ($img_src == null){
+                                $img_src = "../images/noImg.png";
+                              }
+                              ?>
+                              <li class="amazingcarousel-item">
+                                  <div class="amazingcarousel-item-container">
+                                      <div class="amazingcarousel-image">
+                                          <a href="<?=$img_src ?>" class="html5lightbox" data-group="amazingcarousel-1"><img src=<?=$img_src ?> /></a>
+                                      </div>
+                                  </div>
+                              </li>
+                            <?php
+                            }
+                            $video_src = $row['intro_video'];
+                            if ($video_src == null){
+                              $video_src = "../images/video.png";
+                            }
+                           ?>
+                            <li class="amazingcarousel-item">
+                                <div class="amazingcarousel-item-container">
+                                    <div class="amazingcarousel-image">
+                                        <a href="<?=$video_src ?>" class="html5lightbox" data-group="amazingcarousel-1"><img src="../images/video.png" /></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="amazingcarousel-prev"></div>
+                        <div class="amazingcarousel-next"></div>
+                    </div>
+                    <div class="amazingcarousel-nav"></div>
+                    <div class="amazingcarousel-engine"><a href="http://amazingcarousel.com">JavaScript Carousel</a></div>
+                </div>
+            </div>
+            <!-- End of amazingcarousel container -->
         </div>
+        <!-- 畫廊 -->
       </div>
+
       <hr />
       <!-- Product Row -->
 
       <pre><?=mb_substr($row['content'], 0, strlen($row['content']))?></pre>
 
     <!-- Comment -->
+<<<<<<< HEAD
     
 
     <div class="well">
@@ -266,10 +435,61 @@ else
             <iframe src="msgarea.php?page=1&id=<?=$id?>">   
             </iframe>        
          </div>
+=======
 
+
+      <div class="well">
+        <form method="POST" role="form" name="form_msg" id="form_msg" action="send_msg.php?id=<?=$id?>">
+          <div class="row">
+              <div class="form-group">
+                  <?php
+                      if(isset($_SESSION['user'])){
+                          echo "
+                              <div class='col-md-10'>
+                                  <textarea  name='message' id='message' rows='5' class='form-control'></textarea>
+                              </div>";
+                      }
+                      else{
+                          echo "
+                              <div class='col-md-10 text-center'>
+                                  <pre style='margin:14px;'>請先登入以進行留言</pre>
+                              </div>";
+                      }
+                  ?>
+              </div>
+
+              <div class="col-md-2 text-right">
+                  <?php
+                      if(isset($_SESSION['user']))
+                          echo"<button type='submit' class='btn btn-success' >留言</button>";
+                      else
+                          echo "<a class='btn btn-success' href='signIn.php'>登入</a>";
+                  ?>
+              </div>
+          </div>
+        </form>
+
+        <hr>
+
+>>>>>>> ae390f9bd8fe19edb573362baf3c03577f3b5a33
+
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe src="msgarea.php?page=1&id=<?=$id?>">
+          </iframe>
+        </div>
+
+      </div>
+      <!-- well -->
     </div>
+<<<<<<< HEAD
     </div>
     <!-- /#wrapper -->
+=======
+    <!-- page-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+>>>>>>> ae390f9bd8fe19edb573362baf3c03577f3b5a33
     <?php include 'footer.php'; ?>
 </body>
 

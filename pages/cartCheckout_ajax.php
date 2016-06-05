@@ -23,9 +23,10 @@ if (isset($_POST['arr_tPrice'])){
   // 再建立訂單中的詳細商品: order_product
   $b_id = mysqli_insert_id($link);
   for ($i = 0; $i < count($arr_pId); ++$i){
-    $sql = "INSERT INTO order_product (b_id, product_id, quantity) VALUES ('$b_id', '$arr_pId[$i]', '$arr_quan[$i]')";
+    $sql = "INSERT INTO order_product (id, product_id, quantity) VALUES ('$b_id', '$arr_pId[$i]', '$arr_quan[$i]')";
     mysqli_query($link, $sql);
   }
+  echo "下訂成功！";
 }
 else {
   echo "無商品在購物車唷！";
