@@ -206,11 +206,11 @@ if ($logged){
                 padding: 1px;
             }
             
-            .panel-height {
-                height: 650px;
-                width: 950px;
-            }
             
+            
+            .table{
+                margin: auto;
+            }
             .table-bordered > tbody > tr > td,
             .table-bordered > tfoot > tr > th {
                 font-color: rgb(0, 0, 204);
@@ -235,7 +235,7 @@ if ($logged){
                             <form class="form-horizontal" role="form" method="POST" id="form_sU" action="send.php">
                                 <fieldset>
                                     <div class="form-group">
-                                        <table class="table table-bordered col-md-8 col-md-offset-1" style="margin: 5px;">
+                                        <table class="table table-bordered col-md-8 col-md-offset-1">
                                             <tbody>
                                                 <tr>
                                                     <td class="col-md-1 col-md-offset-3 text-right">
