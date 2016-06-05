@@ -46,7 +46,8 @@ else
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
             <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
             <script type="text/javascript"  src="additional-methods.min.js"></script>
-                <script>
+
+            <script>
                 $(document).ready(function($) {
 
                     jQuery.validator.addMethod("none", function(value, element) {
@@ -107,7 +108,13 @@ else
                     height: 50px; // Set this height to the appropriate size
                     overflow-y: scroll; // Only add scroll to vertical column
                 }
-                
+                .error {
+                    color: #D82424;
+                    font-weight: normal;
+                    font-family: "微軟正黑體";
+                    display: block;
+                    padding: 1px;
+                }
                 textarea {
                     resize: none;
                 }
@@ -115,6 +122,8 @@ else
                 pre {
                     margin-bottom: 5px;
                 }
+
+                
                 </style>
         </head>
 
@@ -127,7 +136,7 @@ else
                     <div class="row">
                         <div class="col-sm-12 col-lg-12 col-md-12">
                             <blockquote>
-                                <h3 class="page-header"><?=$row['name'] ?></h1>
+                                <h3 class="page-header"><?=$row['name'] ?></h3>
           </blockquote>
         </div>
       </div>
@@ -253,11 +262,12 @@ else
           <hr>
 
           
-          <div class="embed-responsive embed-responsive-16by9">
+          <div class="embed-responsive embed-responsive-16by9" scrolling="auto">
             <iframe src="msgarea.php?page=1&id=<?=$id?>">   
             </iframe>        
-          </div>
+         </div>
 
+    </div>
     </div>
     <!-- /#wrapper -->
     <?php include 'footer.php'; ?>
