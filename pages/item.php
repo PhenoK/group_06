@@ -21,6 +21,10 @@ else
     $sql = "SELECT * FROM product WHERE id=$id";
 
     if ($result = mysqli_query($link, $sql)){
+        // 若商品id不存在就導向回product.php
+        if (mysqli_num_rows($result) == 0) {
+          echo "<script>window.location = 'product.php'</script>";
+        }
         $row = mysqli_fetch_assoc($result);
         $tb = $row['type'];
         // free memory
