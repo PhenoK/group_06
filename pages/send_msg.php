@@ -1,6 +1,6 @@
 <?php
        include_once('initial.php');
-       include('connect.php');    
+       include('connect.php');
 
         if (!$link ) {
             echo "連結錯誤代碼: ".mysqli_connect_errno()."<br>";
@@ -8,7 +8,7 @@
             exit();
         }
         else
-        {	
+        {
         	$id=$_GET['id'];
         	//$id= mysql_real_escape_string($_REQUEST['id']) ;
             //echo "success";
@@ -18,11 +18,11 @@
             $acc=$_SESSION['user'];
             //$nickname_msg=mysqli_query($link, $sql);
             $time=date('Y-m-d G:i:s');
-            $msg=$_POST['message'];
+            $msg = mysql_entities_fix_string($link, $_POST['message']);
             $sql="INSERT INTO product_review(account,product_id,time,text) VALUES('$acc','$id','$time','$msg')";
-            
+
             mysqli_query($link, $sql);
-            
+
             //header("Location:item.php?id=".$id);
             echo " <script language='JavaScript'>history.go(-1);</script>";
         }
