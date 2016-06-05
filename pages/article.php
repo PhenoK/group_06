@@ -144,6 +144,12 @@
 
                 });
 
+                $(".sign").click(function() {
+                
+                    window.parent.frames.location.href="signIn.php";
+                
+                });
+
                 /*$(window.parent.document).find("#main").load(function(){
                     var main = $(window.parent.document).find("#main");
                     var thisheight = $(document).height()+50;
@@ -369,7 +375,20 @@
                     		                		</div>
                     		                		<input name="res_aid" type="hidden" value="<?=$a_id?>"></input>
                     		                		<div class="row text-center" >
-                    		                			<button type="sumbit" id="<?=$a_id?>" value="<?=$index?>" class="btn btn-success new">回覆</button>
+                    		                		<?php
+                    		                			if(isset($_SESSION['user']))
+                    		                			{
+                    		                				echo"
+                    		                						<button type='sumbit'  class='btn btn-success new'>回覆</button>
+                    		                					";
+                    		                			}
+                    		                			else
+                    		                			{
+                    		                				echo"
+                    		                						<a type='button'  class='btn btn-success sign'>登入</a>
+                    		                					";
+                    		                			}
+                    		                		?>
                     		                		</div>
                     							</div>
                     						</fieldset>
@@ -420,20 +439,7 @@
                     	</div>
                         
                     </nav>
-                    <!--<div class="form-group">
-                              <div class="row">
-                                  <div class="col-sm-2 col-sm-offset-3">
-                                      <label>
-                                          <button type="submit" class="btn btn-primary">資料送出</button>
-                                      </label>
-                                  </div>
-                                  <div class="col-sm-2 col-sm-offset-1">
-                                      <label>
-                                          <button type="reset" class="btn btn-warning">重新填寫</button>
-                                      </label>
-                                  </div>
-                              </div>
-                          </div>-->
+                    
         </div>
         <!-- /#wrapper -->
     </body>
