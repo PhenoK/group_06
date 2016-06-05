@@ -77,23 +77,11 @@ include_once('connect.php');
 
 
         <?php
-        for ($panel_i = 1; $panel_i <= 2; ++$panel_i){
-          if ($panel_i == 1)
-            $panel_type = "bolt";
-          else
-            $panel_type = "eye";
-
+          $panel_type = "bolt";
           // panel-title
-          if ($panel_i == 1){
-            $p_tp = "red";
-            $p_tit = "熱門商品";
-            $sql = "SELECT * FROM product ORDER BY sales DESC LIMIT 3";
-          }
-          else {
-            $p_tp = "green";
-            $p_tit = "最新商品";
-            $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 3";
-          }
+          $p_tp = "red";
+          $p_tit = "熱門商品";
+          $sql = "SELECT * FROM product ORDER BY sales DESC LIMIT 6";
           ?>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-12">
@@ -105,7 +93,13 @@ include_once('connect.php');
                   <div class="row">
                   <?php
                     if ($result = mysqli_query($link, $sql)){
-                      for ($i = 1; $i <= 3; ++$i){
+                      for ($i = 1; $i <= 6; ++$i){
+                        // if (!in_array($id, $arr_product)){
+                        //   // 若顯示在首頁中的商品尚未此id，加入顯示的陣列
+                        //   $arr_cart[] = $id;
+                        //   $cart_price += $price;
+                        // }
+                        // $arr_product[] =
                         $row = mysqli_fetch_assoc($result);
                         $id = $row['id'];
                         ?>
@@ -151,9 +145,6 @@ include_once('connect.php');
             <!-- col -->
           </div>
           <!-- popular product Row-->
-          <?php
-        }
-        ?>
       </div>
       <!-- total product row -->
 
