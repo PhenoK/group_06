@@ -102,17 +102,26 @@
                 
             });
 
+            /*$(window.parent.document).find("#main").load(function(){
+                var main = $(window.parent.document).find("#main");
+                var thisheight = $(document).height()+50;
+                main.height(thisheight);
+            });*/
 
         });
     </script>
 
-    
-
 
     <style>
+
         textarea{
             resize: none;
-        }    
+        }
+
+        pre.cell {
+          border:none;
+      }
+
     </style>
 
 </head>
@@ -136,7 +145,7 @@
         {
 
             $total_records=mysqli_num_rows($result);
-            if($total_records!=0)
+            if($total_records>0)
             {
                 $total_page=ceil($total_records/5);
 
@@ -231,18 +240,37 @@
     ?>
 
     <hr>
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    
+    <div style="margin-bottom:40px">
+        <pre class="cell"></pre>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom"  role="navigation">
         <div class="text-center">
             <?php
                 if($total_records!=0)
                 {
+                    $pre_page=$page-1;
+                    $next_page=$page+1;
+
+                    if($page!=1)
+                        echo "<a class='btn btn-info'"."href='msgarea.php?page=".$pre_page."&id=".$id."'><</a>";
+                    else
+                        echo "<a class='btn btn-danger disabled'><</a>";
+
                     for($i=1;$i<=$total_page;$i++)
                     {
+
                         if($i==$page)
                             echo"<a class='btn btn-primary' id='cur'>".$i."</a>";
                         else
                             echo "<a class='btn btn-info'"."href='msgarea.php?page=".$i."&id=".$id."'>".$i."</a>";
                     }
+
+                    if($page!=$total_page)
+                        echo "<a class='btn btn-info'"."href='msgarea.php?page=".$next_page."&id=".$id."'>></a>";
+                    else
+                        echo "<a class='btn btn-danger disabled'>></a>";
                 }
                 
     
