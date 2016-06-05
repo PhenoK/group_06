@@ -148,7 +148,7 @@ else {
 
 
         // 若有接受到任何搜尋商品的資訊
-        if (isset($_GET['price_min'])){
+        if (isset($_GET['price_min']) && !isset($_GET['b_type'])){
           $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
           WHERE (name LIKE '%$item_name%')
           AND (price BETWEEN $price_min AND $price_max)";
@@ -160,6 +160,7 @@ else {
             AND (price BETWEEN $price_min AND $price_max)";
           }
           else {
+            // echo "<script>alert('debug');</script>";
             $sql = "SELECT * FROM product JOIN $tb ON product.id = $tb.id
             WHERE ($tb.lang = '$lang_type')
             AND ($tb.category = '$b_type')
