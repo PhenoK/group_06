@@ -35,7 +35,10 @@
                       "fields": [ 
                           {
                               "label": "商品類型:",
-                              "name": "type"
+                              "name": "type",
+                              type: "select",
+                              options: [ "book", "3c" ,"game"],
+                              def: "book"
                           },{
                               "label": "商品名稱:",
                               "name": "name"
@@ -46,63 +49,57 @@
                               "label": "商品存貨量:",
                               "name": "inventory"
                           }, {
-                              "label": "評價:",
+                              "label": "商品評價:",
                               "name": "rank"
                           }, {
+                              "label": "銷售量:",
+                              "name": "sales"
+                          }, {
                               "label": "商品預覽圖片:",
-                              "name": "pre_img",
+                              "name": "pre_img"
                           }, {
                               "label": "商品介紹圖片1:",
-                              "name": "intro_img1",
+                              "name": "intro_img1"
                           }, {
                               "label": "商品介紹圖片2:",
-                              "name": "intro_img2",
+                              "name": "intro_img2"
                           }, {
                               "label": "商品介紹圖片3:",
-                              "name": "intro_img3",  
+                              "name": "intro_img3"  
                            },{
                               "label": "商品介紹影片:",
-                              "name": "intro_vedio",  
+                              "name": "intro_vedio"
                            }       
                       ]
                   } );
                     
                    
                   var oTable = $('#product').DataTable( {
+                       
+                      scrollX: true,
                        dom: "Bfrtip",
                       "ajax": {
                           url: "CRUD_getData.php",
                           type: "POST"
                       },
+                      scrollX:true,
                       "serverSide": true,
-                     
+                      select: true,
                       columns: [
-                           {   // Checkbox select column
-                              data: null,
-                              defaultContent: '',
-                              className: 'select-checkbox',
-                              orderable: false
-                          },
                           { data: "id" },
                           { data: "type" },
-                          { data: "name" },
-                          { data: "price",render: $.fn.dataTable.render.number( ',', '.', 0, '$' )},
+                          { data: "name"},
+                          { data: "price" },
                           { data: "inventory" },
                           { data: "rank" },
-                          { data: "sales" },
-                          { data: "pre_img"},
-                          { data: "intro_img1" }, 
-                          { data: "intro_img2"},
-                          { data: "intro_img3"},
+                          { data: "sales"},
+                          { data: "pre_img" },
+                          { data: "intro_img1" },
+                          { data: "intro_img2" },
+                          { data: "intro_img3" },
                           { data: "intro_video" }
-                         
                       ],
-                       order: [ 1, 'asc' ],
-                      select: {
-                          style:    'os',
-                          selector: 'td.select-checkbox'
-                      },
-                      buttons: 
+                        buttons: 
                               [
                                   { extend: "create",   editor: editor, text: '新增' },
                                   { extend: "edit",   editor: editor, text: '修改' },
@@ -121,6 +118,7 @@
                               ],
                         "pagingType": "full_numbers"
                   } );
+
                    
        } );   
 
@@ -186,10 +184,21 @@
                           { data: "isbn" }
                          
                       ],
-                      buttons: 
+                        buttons: 
                               [
                                   { extend: "create",   editor: editor, text: '新增' },
-                                  { extend: "edit",   editor: editor, text: '修改' }
+                                  { extend: "edit",   editor: editor, text: '修改' },
+                                  {
+                                  extend: 'collection',
+                                  text: '匯出',
+                                  buttons: [
+                                      'copy',
+                                      'excel',
+                                      'csv',
+                                      'pdf',
+                                      'print'
+                                  ]
+                                  }
                               ],
                         "pagingType": "full_numbers"
                   } );
@@ -221,7 +230,7 @@
                                 <table id="product" name="display_product" class="table table-responsive table-bordered col-md-2  col-md-offset-1" style="margin: auto;">
                                    <thead>
                                      <tr>
-                                       <th></th>
+                                        
                                        <th>商品編號</th>
                                        <th>商品類型</th>
                                        <th>商品名稱</th>
