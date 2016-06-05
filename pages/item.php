@@ -48,6 +48,8 @@ else
     </title>
     <?php include 'head.php'; ?>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script src="../js/jRate.js"></script>
+
     <script type="text/javascript"  src="additional-methods.min.js"></script>
         <script>
         function delProduct(id){
@@ -78,6 +80,18 @@ else
           });
         }
         $(document).ready(function($) {
+            $('#jRate').jRate({
+              onChange: function(rating){
+                $('#change-rate-value').text("選取到評價：" + rating);
+              },
+              onSet: function(rating){
+                $('#set-rate-value').text("評價設定：" + rating);
+              },
+              rating : 3,
+              opacity: 0.7,
+              startColor: 'yellow',
+              endColor: 'red'
+            });
 
             jQuery.validator.addMethod("none", function(value, element) {
                 return value.split(" ").length - 1 < value.length;
@@ -216,27 +230,20 @@ else
                    <i class="fa fa-usd fa-fw"></i><b class="dis"><?=$row['price'] ?></b>
                  </span>
                </li>
+              <div class="ratings pull-right">
+                <p><?=$review_num ?> 則評論</p>
+                <div id="jRate"></div>
+                <span id="change-rate-value" style="color:rgb(205, 195, 55)"></span>
+                <br />
+                <span id="set-rate-value" style="color:rgb(244, 156, 6)"></span>
+              </div>
             </ul>
-
           </div>
           <br />
-          <div class="ratings">
-            <p class="pull-right"><?=$review_num ?> 則評論</p>
-            <p>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star-half-o"></span>
-            </p>
-
-          </div>
-
           <?php include "cartAddRemove.php"; ?>
           <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
             <i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
           </button>
-
           <?php
           // 若是管理員
           if (@$_SESSION['level'] == 2){
@@ -272,11 +279,15 @@ else
                               </li>
                             <?php
                             }
+                            $video_src = $row['intro_video'];
+                            if ($video_src == null){
+                              $video_src = "../images/video.png";
+                            }
                            ?>
                             <li class="amazingcarousel-item">
                                 <div class="amazingcarousel-item-container">
                                     <div class="amazingcarousel-image">
-                                        <a href="https://www.youtube.com/embed/pAyMDW2we1s" class="html5lightbox" data-group="amazingcarousel-1"><img src="../images/video.png" /></a>
+                                        <a href="<?=$video_src ?>" class="html5lightbox" data-group="amazingcarousel-1"><img src="../images/video.png" /></a>
                                     </div>
                                 </div>
                             </li>
