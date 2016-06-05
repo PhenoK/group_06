@@ -98,7 +98,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <a href="accountInfomation.php"> <i class="fa fa-pencil fa-fw"></i> 個人資料</a>
+                  <a href="AccountInformation.php"> <i class="fa fa-pencil fa-fw"></i> 個人資料</a>
                 </li>
               </ul>
           </li>

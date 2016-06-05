@@ -17,20 +17,19 @@ use
     DataTables\Editor\Validate;
  
 // Build our Editor instance and process the data coming from _POST
-Editor::inst( $db, 'product' )
+Editor::inst( $db, 'member' )
     ->fields(
         Field::inst( 'id' ),
-        Field::inst( 'type' ),
+        Field::inst( 'account' ),
+        Field::inst( 'password' ),
         Field::inst( 'name' ),
-        Field::inst( 'price' ),
-        Field::inst( 'inventory' ),
-        Field::inst( 'rank' ),
-        Field::inst( 'sales' ),
-        Field::inst( 'pre_img' ),
-        Field::inst( 'intro_img1' ) ,
-        Field::inst( 'intro_img2' ) ,
-        Field::inst( 'intro_img3' ),
-        Field::inst( 'intro_video' )         
+        Field::inst( 'sex' ),
+        Field::inst( 'birth' ),
+        Field::inst( 'tel_no' ),
+        Field::inst( 'addr' ),
+        Field::inst( 'mail' ),
+        Field::inst( 'nickname' ) ,
+         Field::inst( 'level' )   
     )
 
     ->process( $_POST )
