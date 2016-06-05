@@ -80,8 +80,9 @@
                                 alert("刪除失敗");
                             },
                             success : function($result){
-                                $(".msg_area").load("msgarea.php?page="+page+"&id="+id);
+                                //$(".msg_area").load("msgarea.php?page="+page+"&id="+id);
                                 alert("刪除成功");
+                                window.location.href = "msgarea.php?page="+page+"&id="+id;
                             }
                 });
                 
