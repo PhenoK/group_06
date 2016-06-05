@@ -9,6 +9,35 @@ include_once('connect.php');
 <head>
   <title>歡迎來到元經樵屋頂拍賣</title>
   <?php include 'head.php'; ?>
+  <script>
+  function delProduct(id){
+    if (!confirm("確定要刪除？")){
+        return false;
+    }
+    $.ajax({
+      url: 'delProduct_ajax.php',
+      data: {
+        p_id: id
+      },
+      type: 'POST',
+      dataType: "text",
+      success: function(text) {
+        if (text.indexOf("成功")){
+          alert(text);
+          location.reload();
+        }
+        else {
+          alert(text);
+          return;
+        }
+
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert("刪除失敗！");
+      }
+    });
+  }
+  </script>
 </head>
 
 <body>
@@ -91,6 +120,17 @@ include_once('connect.php');
                             <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
                               <i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
                             </button>
+                            <?php
+                            // 若是管理員
+                            if ($_SESSION['level'] == 2){
+                              // 可下架商品
+                              ?>
+                              <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
+                                <i class="fa fa-trash fa-fw"></i> 刪除商品<i class="fa"></i>
+                              </button>
+                              <?php
+                            }
+                             ?>
                             <h4 class="pull-right"> 特價<?=$row['price'] ?>元</h4>
                           </div>
                           <!-- div each product -->

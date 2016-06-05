@@ -46,6 +46,33 @@ else
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script type="text/javascript"  src="additional-methods.min.js"></script>
         <script>
+        function delProduct(id){
+          if (!confirm("確定要刪除？")){
+              return false;
+          }
+          $.ajax({
+            url: 'delProduct_ajax.php',
+            data: {
+              p_id: id
+            },
+            type: 'POST',
+            dataType: "text",
+            success: function(text) {
+              if (text.indexOf("成功")){
+                alert(text);
+                window.location = 'product.php';
+              }
+              else {
+                alert(text);
+                return;
+              }
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              alert("刪除失敗！");
+            }
+          });
+        }
         $(document).ready(function($) {
 
             jQuery.validator.addMethod("none", function(value, element) {
@@ -198,11 +225,25 @@ else
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half-o"></span>
             </p>
-            <?php include "cartAddRemove.php"; ?>
-            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
-              <i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
-            </button>
+
           </div>
+
+          <?php include "cartAddRemove.php"; ?>
+          <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
+            <i class="fa fa-shopping-cart fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
+          </button>
+
+          <?php
+          // 若是管理員
+          if ($_SESSION['level'] == 2){
+            // 可下架商品
+            ?>
+            <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
+              <i class="fa fa-trash fa-fw"></i> 刪除商品<i class="fa"></i>
+            </button>
+            <?php
+          }
+           ?>
         </div>
         <div class="col-sm-6 col-lg-6 col-md-6">
             <!-- amazingcarousel container -->
