@@ -16,9 +16,10 @@ if (isset($_POST['account'])){
   if (($num=mysqli_num_rows($result)) == 0){
     ?>
     <script>
-    $(document).ready(function(){
-			$('#error').addClass("alert alert-danger");
-      $('#error').html("<i class=\"fa fa-times-circle fa-fw\"></i>帳號或密碼錯誤！<i class=\"fa\"></i>");
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var tmp = document.getElementById("error");
+			tmp.className += " alert alert-danger";
+      tmp.innerHTML = "<i class=\"fa fa-times-circle fa-fw\"></i>帳號或密碼錯誤！<i class=\"fa\"></i>";
     });
     </script>
     <?php
