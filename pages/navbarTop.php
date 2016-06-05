@@ -7,11 +7,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">元經樵屋頂拍賣</a>
+        <img class="pull-left" src="../images/favicon.ico" /><a class="navbar-brand" href="index.php">元經樵屋頂拍賣</a>
     </div>
     <!-- /.navbar-header -->
     <ul class="nav navbar-top-links navbar-right">
-        <!-- /.dropdown -->
         <li>
             <a href="bulletin.php">
                 <i class="fa fa-info-circle fa-fw"></i> 系統公告與關於我們<i class="fa"></i>
@@ -19,6 +18,7 @@
             <!-- /.dropdown-bulletin -->
         </li>
         <!-- /.dropdown -->
+
         <li>
             <a href="shoppingCart.php">
                 <?php
@@ -30,6 +30,14 @@
                 <span id="cart_price" class="badge alert-success"><i class="fa fa-usd fa-fw"></i><?=@$_COOKIE['cart_price'] ?></span><i class="fa"></i>
             </a>
             <!-- /.dropdown-shopcart -->
+        </li>
+        <!-- /.dropdown -->
+
+        <li>
+            <a href="board.php">
+                <i class="fa fa-italic fa-fw"></i> 留言板<i class="fa"></i>
+            </a>
+            <!-- /.dropdown-plus -->
         </li>
         <!-- /.dropdown -->
         <?php
@@ -55,22 +63,44 @@
           // 若為管理者
           if (@$_SESSION['level'] == 2){
             ?>
-            <li>
-                <a href="controlPanel.php">
-                    <i class="fa fa-sitemap fa-fw"></i> 網站控制台<i class="fa"></i>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-sitemap fa-fw"></i> 網站控制台 <i class="fa fa-caret-down"></i>
                 </a>
                 <!-- /.dropdown-plus -->
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="orderData.php"> <i class="fa fa-list-alt fa-fw"></i> 查看所有訂單</a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="memberData.php"> <i class="fa fa-users fa-fw"></i> 查看所有會員</a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="product_CRUD.php"> <i class="fa fa-shopping-bag fa-fw"></i> 查看所有商品</a>
+                  </li>
+                </ul>
             </li>
             <!-- /.dropdown -->
             <?php
           }
           ?>
 
-          <li>
-              <a href="profile.php">
-                  <i class="fa fa-user fa-fw"></i> 個人帳戶<i class="fa"></i>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-user fa-fw"></i> 個人帳戶 <i class="fa fa-caret-down"></i>
               </a>
               <!-- /.dropdown-plus -->
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="shoppingList.php?account=<?=$_SESSION['user'] ?>"> <i class="fa fa-list-alt fa-fw"></i> 個人購買記錄</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="accountInfomation.php"> <i class="fa fa-pencil fa-fw"></i> 個人資料</a>
+                </li>
+              </ul>
           </li>
           <!-- /.dropdown -->
           <li>

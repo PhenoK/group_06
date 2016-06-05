@@ -41,3 +41,8 @@ body {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+/* 為了解決auto complete跑出的建議會成為modal觸及不到的地方 */
+.ui-autocomplete{
+  z-index: 5000;
+}
