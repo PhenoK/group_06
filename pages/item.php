@@ -190,6 +190,50 @@ else
                     </li>
                   <?php
                     break;
+                  case 'game':
+                    ?>
+                      <li>
+                        <span>種類：</span>
+                        <span><?=$row['category'] ?></span>
+                      </li>
+                      <li>
+                        <span>語言：</span>
+                        <span><?=$row['lang'] ?></span>
+                      </li>
+                      <li>
+                        <span>上市日期：</span>
+                        <span><?=$row['sale_date'] ?></span>
+                      </li>
+                      <li>
+                        <span>開發商：</span>
+                        <span><?=$row['company'] ?></span>
+                      </li>
+                      <li>
+                        <span>遊戲平台：</span>
+                        <span><?=$row['platform'] ?></span>
+                      </li>
+                      <li>
+                        <span>支援多人連線：</span>
+                        <span>
+                          <?php
+                          if ($row['multi_player'] == 1){
+                            echo "是";
+                          }
+                          else {
+                            echo "否";
+                          } ?>
+                        </span>
+                      </li>
+                    <?php
+                      break;
+                    case '3c':
+                        ?>
+                          <li>
+                            <span>保固：</span>
+                            <span><?=$row['warranty'] ?></span>
+                          </li>
+                        <?php
+                          break;
                   default:
                     break;
                 }
