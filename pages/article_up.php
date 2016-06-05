@@ -4,7 +4,8 @@
 
 	$time=$_POST['time'];
 	$acc=$_SESSION['user'];
-	$newmsg=$_POST['edit_message'];
+
+	$newmsg=mysql_entities_fix_string($link,$_POST['edit_message']);
 	$type=$_POST['type'];
 	$a_id=$_POST['a_id'];
 	$new_time=date('Y-m-d G:i:s');

@@ -16,7 +16,7 @@
             $acc=$_SESSION['user'];
             $a_id=$_POST['res_aid'];
             $time=date('Y-m-d G:i:s');
-            $msg=$_POST['new_res'];
+            $msg = mysql_entities_fix_string($link, $_POST['new_res']);
             $sql="INSERT INTO article_response(account,a_id,time,text) VALUES('$acc','$a_id','$time','$msg')";
             
             mysqli_query($link, $sql);
