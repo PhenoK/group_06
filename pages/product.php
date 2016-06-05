@@ -220,16 +220,6 @@ else {
                   <p><?=mb_substr($row['content'], 0, 200)?></p>
                 </div>
                 <br />
-                <div class="ratings">
-                  <p class="pull-right"><?=$row['rank'] ?> 則評論</p>
-                  <p>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star-half-o"></span>
-                  </p>
-                </div>
                 <?php
                 include "cartAddRemove.php";
                 ?>
