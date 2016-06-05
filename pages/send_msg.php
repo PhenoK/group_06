@@ -23,8 +23,8 @@
             
             mysqli_query($link, $sql);
             
-            header("Location:item.php?id=".$id);
-            //echo " <script language='JavaScript'>history.go(-1);</script>";
+            //header("Location:item.php?id=".$id);
+            echo " <script language='JavaScript'>history.go(-1);</script>";
         }
 
 ?>
