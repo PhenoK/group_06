@@ -77,11 +77,22 @@ include_once('connect.php');
 
 
         <?php
-          $panel_type = "bolt";
+        $sql = "SELECT * FROM product ORDER BY sales DESC LIMIT 6";
+        if ($result = mysqli_query($link, $sql)){
+        for ($panel_i = 1; $panel_i <= 2; ++$panel_i){
+          if ($panel_i == 1)
+            $panel_type = "bolt";
+          else
+            $panel_type = "eye";
           // panel-title
-          $p_tp = "red";
-          $p_tit = "熱門商品";
-          $sql = "SELECT * FROM product ORDER BY sales DESC LIMIT 6";
+          if ($panel_i == 1){
+            $p_tp = "red";
+            $p_tit = "熱門商品";
+          }
+          else {
+            $p_tp = "green";
+            $p_tit = "最新商品";
+          }
           ?>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-12">
@@ -92,48 +103,44 @@ include_once('connect.php');
                 <div class="panel-body">
                   <div class="row">
                   <?php
-                    if ($result = mysqli_query($link, $sql)){
-                      for ($i = 1; $i <= 6; ++$i){
-                        // if (!in_array($id, $arr_product)){
-                        //   // 若顯示在首頁中的商品尚未此id，加入顯示的陣列
-                        //   $arr_cart[] = $id;
-                        //   $cart_price += $price;
-                        // }
-                        // $arr_product[] =
-                        $row = mysqli_fetch_assoc($result);
-                        $id = $row['id'];
-                        ?>
-                          <div class="col-sm-4 col-lg-4 col-md-4">
-                            <a href="item.php?id=<?=$row['id'] ?>">
-                              <img src="<?=$row['pre_img'] ?>" alt="" class="img-thumbnail">
-                            </a>
-                            <h4><a href="item.php?id=<?=$row['id'] ?>"><?=$row['name'] ?></a></h4>
-                            <?php
-                            include "cartAddRemove.php";
+                    for ($i = 1; $i <= 3; ++$i){
+                      // if (!in_array($id, $arr_product)){
+                      //   // 若顯示在首頁中的商品尚未此id，加入顯示的陣列
+                      //   $arr_cart[] = $id;
+                      //   $cart_price += $price;
+                      // }
+                      // $arr_product[] =
+                      $row = mysqli_fetch_assoc($result);
+                      $id = $row['id'];
+                      ?>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                          <a href="item.php?id=<?=$row['id'] ?>">
+                            <img src="<?=$row['pre_img'] ?>" alt="" class="img-thumbnail">
+                          </a>
+                          <h4><a href="item.php?id=<?=$row['id'] ?>"><?=$row['name'] ?></a></h4>
+                          <?php
+                          include "cartAddRemove.php";
+                          ?>
+                          <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
+                            <i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
+                          </button>
+                          <?php
+                          // 若是管理員
+                          if (@$_SESSION['level'] == 2){
+                            // 可下架商品
                             ?>
-                            <button id="p<?=$id ?>" class="btn btn-danger centered" onclick="cart(<?=$cart_func_oper ?>, <?=$id ?>, <?=$row['price'] ?>)">
-                              <i class="fa fa-cart-plus fa-fw"></i> <?=$cart_btn_oper ?>購物車<i class="fa"></i>
+                            <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
+                              <i class="fa fa-trash fa-fw"></i> 刪除商品<i class="fa"></i>
                             </button>
                             <?php
-                            // 若是管理員
-                            if (@$_SESSION['level'] == 2){
-                              // 可下架商品
-                              ?>
-                              <button type="button" class="btn btn-inverse centered" onclick="delProduct(<?=$id ?>);">
-                                <i class="fa fa-trash fa-fw"></i> 刪除商品<i class="fa"></i>
-                              </button>
-                              <?php
-                            }
-                             ?>
-                            <h4 class="pull-right"> 特價<?=$row['price'] ?>元</h4>
-                          </div>
-                          <!-- div each product -->
-                        <?php
-                      }
+                          }
+                           ?>
+                          <h4 class="pull-right"> 特價<?=$row['price'] ?>元</h4>
+                        </div>
+                        <!-- div each product -->
+                      <?php
                     }
-                    else {
-                      echo "尚無商品資料唷！";
-                    }
+
                  ?>
                   </div>
                   <!-- 三個product的row -->
@@ -145,9 +152,17 @@ include_once('connect.php');
             <!-- col -->
           </div>
           <!-- popular product Row-->
-      </div>
-      <!-- total product row -->
-
+          <?php
+        }
+        ?>
+        </div>
+        <!-- total product row -->
+        <?php
+      }
+      else {
+        echo "尚無商品資料唷！";
+      }
+         ?>
 
     </div>
     <!-- page-wrapper -->
