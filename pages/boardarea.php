@@ -123,40 +123,44 @@
 				<?php
 
 					$sql="SELECT * FROM article ORDER BY edit_time DESC";
-					$result=mysqli_query($link,$sql);
-					$total_records=mysqli_num_rows($result);
-
-					if($total_records!=0)
+					if($result=mysqli_query($link,$sql))
 					{
+						$total_records=mysqli_num_rows($result);
 
-						$total_page=ceil($total_records/$devide);
-
-						mysqli_data_seek($result,($page-1)*$devide);
-						
-						for($i=1;$i<=$devide;$i++)
+						if($total_records!=0)
 						{
-							$row=mysqli_fetch_assoc($result);
-							$tr_class=$i%5;
-							if( $i <= $total_records &&  $total_records-($page-1)*$devide-$i>=0)
-							{
 
-								
-								echo "
-										<tr class='clickable-row tr_hover".$tr_class."' data-href='article.php?id="
-											.$row['id']."&page=1'>
-											<td>".$row['time']."</td>
-											<td>".$row['edit_time']."</td>
-											<td>".$row['title']."</td>
-											<td>".$row['account']."</td>
-										</tr>
-									";
-							}
-							else
-								break;
+							$total_page=ceil($total_records/$devide);
+
+							mysqli_data_seek($result,($page-1)*$devide);
 							
-						}
+							for($i=1;$i<=$devide;$i++)
+							{
+								$row=mysqli_fetch_assoc($result);
+								$tr_class=$i%5;
+								if( $i <= $total_records &&  $total_records-($page-1)*$devide-$i>=0)
+								{
 
+									
+									echo "
+											<tr class='clickable-row tr_hover".$tr_class."' data-href='article.php?id="
+												.$row['id']."&page=1'>
+												<td>".$row['time']."</td>
+												<td>".$row['edit_time']."</td>
+												<td>".$row['title']."</td>
+												<td>".$row['account']."</td>
+											</tr>
+										";
+								}
+								else
+									break;
+								
+							}
+
+						}
 					}
+					
+					
 
 				?>
 			</tbody>
