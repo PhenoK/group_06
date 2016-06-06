@@ -20,6 +20,8 @@
   <link href="../css/sb-admin-2.css" rel="stylesheet">
   <!-- Custom Fonts -->
   <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- group_06 css -->
+  <link href="../css/group_06.css" rel="stylesheet">
   <!-- Custom scrolling-nav CSS -->
   <link href="../css/scrolling-nav.css" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,35 +62,41 @@
                 <td>2016/03/29</td>
                 <td>Bootstrap樣板套用與修改，網站整體雛形建立（純靜態）</td>
               </tr>
+              <tr>
+                <td>2.0</td>
+                <td>2016/06/06</td>
+                <td>加入後端功能、資料庫資料</td>
+              </tr>
             </tbody>
             <thead>
               <tr>
                 <th><h3><strong>已完成功能</strong></h3></th>
                 <th><h3><strong>未完成功能（能看見但使用無反應的）</strong></h3></th>
-                <th><h3><strong>待補功能（還未加上頁面的）</strong></h3></th>
+                <th><h3><strong>殘念未有功能</strong></h3></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <ol>
-                    <li>尋覽列：「系統公告與關於我們」、「登入」、「加入會員」頁面及其索引。</li>
-                    <li>商品菜單列：各商品頁面及其索引。</li>
-                    <li>商品頁面資訊。</li>
+                    <li>尋覽列：各頁面索引均有功能。</li>
+                    <li>商品菜單列：各商品頁面及其索引（可搜尋商品）。</li>
+                    <li>商品頁面資訊（頁面下還可會員評論、會員評分；）。</li>
+                    <li>可瀏覽商品、搜尋商品、將商品加入購物車後下訂（還可付款）。</li>
+                    <li>留言板會員們可詢問問題、討論聊天</li>
+                    <li>網站控制台中，管理員可新增、修改、刪除、查詢所有資料表資訊。</li>
+                    <li>有稍微防SQL injection、XSS。</li>
                   </ol>
                 </td>
                 <td>
                   <ol>
-                    <li>尋覽列：「購物車」尚不能使用，只能索引至當前頁面。</li>
-                    <li>菜單列：「搜尋」功能尚不能使用。</li>
-                    <li>登入、加入會員、忘記密碼等頁面已有基本前端表單驗證，不過仍有少部分有bug。</li>
-                    <li>商品頁面的回覆與購物車功能尚不能使用。</li>
+                    <li>無</li>
                   </ol>
                 </td>
                 <td>
                   <ol>
-                    <li>尋覽列：「留言板」頁面及其索引。</li>
-                    <li>任何有出現表格的部分可針對資料項做排序。</li>
+                    <li><strong>不能真的付款給站方XD。</strong></li>
+                    <li>HTML 5畫布功能。</li>
                     <li>當前、累積瀏覽人次。</li>
                   </ol>
                 </td>
@@ -109,7 +117,8 @@
         <div class="col-lg-12">
           <h1>關於</h1>
           <p>這是一個充滿元味的網站！</p>
-          <p>由江雨樵、廖元豪、張勛凱三人協力製作，主要使用網路上免費開源的Bootstrap Template。</p>
+          <p>由江雨樵、廖元豪、張勛凱三人協力製作，前端主要使用網路上免費開源的Bootstrap Template。</p>
+          <p>書本資訊主要用程式爬蟲，格式有怪怪的地方煩請見諒Orz，一切網頁資料僅供學習用！不做任何營利用途。</p>
           <a class="btn btn-danger page-scroll" href="#announce">滑至公告</a>
           <a class="btn btn-success page-scroll" href="#contact">滑至聯絡資訊</a>
         </div>
@@ -126,6 +135,7 @@
           <p>客服專線：0912345678</p>
           <p>客服時間：週二18:30~21:00（例假日除外）</p>
           <p>地址：彰化師範大學寶山校區工學院EB211 </p>
+          <p>歡迎到留言版回報問題與交流唷！ </p>
           <a class="btn btn-danger page-scroll" href="#announce">滑至公告</a>
           <a class="btn btn-info page-scroll" href="#about">滑至關於</a>
         </div>

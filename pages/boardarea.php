@@ -60,6 +60,12 @@
   		    
   		    });
 
+  		    $(".unlogged").click(function() {
+  		    
+  		        window.parent.frames.location.href="signIn.php";
+  		    
+  		    });
+
   		    /*$(window.parent.document).find("#main").load(function(){
   		    	var main = $(window.parent.document).find("#main");
   		    	var thisheight = $(document).height()+100;
@@ -102,7 +108,7 @@
 					}
 					else
 					{
-						echo "<a href='signIn.php' class='btn btn-info' role='button'>登入發表文章</a>";
+						echo "<a  class='btn btn-info unlogged' role='button'>登入發表文章</a>";
 					}
 				?>
 				
