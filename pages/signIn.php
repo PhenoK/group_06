@@ -114,16 +114,25 @@ else if (isset($_SESSION['user'])){
 									maxlength: "密碼最長12個字"
 							},
 
-					}
+					},
+
+					errorPlacement: function(error, element) {
+
+					    var eid = element.attr('name');
+					    $('input[name=' + eid + ']').after(error);
+					},
 			});
 
 	});
 	</script>
 	<style>
-	.panel-height {
-			height: 300px;
+	.error {
+	    color: #D82424;
+	    font-weight: normal;
+	    font-family: "微軟正黑體";
+	    display: block;
+	    padding: 1px;
 	}
-
 	.panel-body {
 			word-break: break-all
 	}
@@ -147,35 +156,26 @@ else if (isset($_SESSION['user'])){
 															<fieldset>
 																<div class="form-group">
 																		<div class="row">
-																				<label class="col-md-2 col-md-offset-1" for="account">帳號</label>
-																				<div class="col-md-7">
+																				<label class="col-md-2 col-sm-offset-1" for="account">帳號</label>
+																				<div class="col-md-6">
 																						<input class="form-control" placeholder="限6~12個字元" id="account" name="account" type="text" autofocus>
 																				</div>
 																		</div>
 																</div>
 																<div class="form-group">
 																		<div class="row">
-																				<label class="col-md-2 col-md-offset-1" for="password">密碼</label>
-																				<div class="col-md-7">
+																				<label class="col-md-2 col-sm-offset-1" for="password">密碼</label>
+																				<div class="col-md-6">
 																						<input class="form-control" placeholder="限6~12個字元" id="password" name="password" type="password" value="" autofocus>
 																				</div>
 																		</div>
 																</div>
-																<div class="row">
-																		<div class="col-md-offset-3">
-																				<div class="checkbox">
-																						<label>
-																								<input name="remember" type="checkbox" value="Remember Me">保持今日登入狀態
-																						</label>
-																				</div>
-																		</div>
-																</div>
+
 																<!-- Change this to a button or input when using this as a form -->
 																<div class="form-group">
 																		<div class="row">
-																				<button type="submit" class="btn btn-lg btn-success col-md-6 col-md-offset-3" style="margin-bottom:5px;">登入</button>
-																				<a href="signUp.php" class="btn btn-primary col-md-4 col-md-offset-1">加入會員</a>
-																				<a href="forget.php" class="btn btn-warning col-md-4 col-md-offset-2">忘記密碼</a>
+																				<button type="submit" class="btn btn-lg btn-success col-md-4 col-sm-offset-4" style="margin-bottom:5px;">登入</button>
+																				<a href="signUp.php" class="btn btn-primary col-md-4 col-md-offset-4">加入會員</a>
 																		</div>
 																</div>
 														</fieldset>
