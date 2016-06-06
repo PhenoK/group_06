@@ -118,6 +118,7 @@
           <h1>關於</h1>
           <p>這是一個充滿元味的網站！</p>
           <p>由江雨樵、廖元豪、張勛凱三人協力製作，前端主要使用網路上免費開源的Bootstrap Template。</p>
+          <p>書本資訊主要用程式爬蟲，格式有怪怪的地方煩請見諒Orz，一切網頁資料僅供學習用！不做任何營利用途。</p>
           <a class="btn btn-danger page-scroll" href="#announce">滑至公告</a>
           <a class="btn btn-success page-scroll" href="#contact">滑至聯絡資訊</a>
         </div>
