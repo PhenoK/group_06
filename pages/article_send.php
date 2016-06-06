@@ -13,7 +13,7 @@
             mysqli_query($link,"SET collation_connection = 'utf8_unicode_ci'");
 
             $title=$_POST['title'];
-            $text=$_POST['content'];
+            $text = mysql_entities_fix_string($link, $_POST['content']);
             $acc=$_SESSION['user'];
 
             $time=date('Y-m-d G:i:s');

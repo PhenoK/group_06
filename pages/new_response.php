@@ -16,10 +16,13 @@
             $acc=$_SESSION['user'];
             $a_id=$_POST['res_aid'];
             $time=date('Y-m-d G:i:s');
-            $msg=$_POST['new_res'];
+            $msg = mysql_entities_fix_string($link, $_POST['new_res']);
             $sql="INSERT INTO article_response(account,a_id,time,text) VALUES('$acc','$a_id','$time','$msg')";
-            
+            mysqli_query($link,$sql);
+
+            $sql="UPDATE article SET edit_time='$time' WHERE id='$a_id'";
             mysqli_query($link, $sql);
+            
             $sql="SELECT * FROM article_response WHERE a_id='$a_id'";
             $result=mysqli_query($link,$sql);
             $total_records=mysqli_num_rows($result);

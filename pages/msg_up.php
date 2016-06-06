@@ -4,7 +4,7 @@
 
 	$time=$_POST['time'];
 	$acc=$_SESSION['user'];
-	$newmsg=$_POST['edit_message'];
+	$newmsg=mysql_entities_fix_string($link,$_POST['edit_message']);
 
 	if(count(explode(" ", $newmsg)) - 1 >= strlen($newmsg))
 	{
