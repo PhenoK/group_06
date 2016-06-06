@@ -23,6 +23,7 @@ Editor::inst( $db, 'product' )
         Field::inst( 'type' ),
         Field::inst( 'name' ),
         Field::inst( 'price' ),
+        Field::inst( 'content' ),
         Field::inst( 'inventory' ),
         Field::inst( 'rank' ),
         Field::inst( 'sales' ),
