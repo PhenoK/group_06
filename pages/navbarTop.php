@@ -13,7 +13,7 @@
     <ul class="nav navbar-top-links navbar-right">
         <li>
             <a href="bulletin.php">
-                <i class="fa fa-info-circle fa-fw"></i> 系統公告與關於我們<i class="fa"></i>
+                <i class="fa fa-info-circle fa-fw"></i> 關於我們<i class="fa"></i>
             </a>
             <!-- /.dropdown-bulletin -->
         </li>
@@ -41,7 +41,7 @@
         </li>
         <!-- /.dropdown -->
         <?php
-        // initial.php會檢查session，其中的$logged為登入狀態
+        // initial.php會檢查session
         if (!$logged){
           ?>
           <li>
