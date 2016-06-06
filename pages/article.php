@@ -100,7 +100,7 @@
                     var acc = $('span').eq(index - 1).text();
                     //alert(acc);
                     var a_id = $(this).get(0).id;
-                    //alert(acc+" "+time+" "+text+" "+type);
+                    //alert(acc+" "+index+" "+time+" "+text+" "+type);
                     $.ajax({
                         url: "article_del.php",
                         data: {
@@ -235,7 +235,7 @@
 
                                                                 <tr>
                                                                     <td>
-                                                                        <button type='button' id='".$a_id."' class='btn btn-danger delete' >刪除</button>
+                                                                        <button type='button' id='".$a_id."' class='btn btn-danger delete' value='1' >刪除</button>
                                                                     
                                                             ";
                                                     }
