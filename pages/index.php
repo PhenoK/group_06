@@ -56,13 +56,13 @@ include_once('connect.php');
               </ol>
               <div class="carousel-inner">
                 <div class="item active">
-                  <a href="item_mic.html"><img class="slide-image" src="../images/coolpc-creative-fatal1ty.gif" alt="coolpc-creative-fatal1ty"></a>
+                  <a href="item.php?id=177"><img class="slide-image" src="../images/coolpc-creative-fatal1ty.gif" alt="coolpc-creative-fatal1ty"></a>
                 </div>
                 <div class="item">
-                  <a href="item_M6S_SSD.html"><img class="slide-image" src="../images/plextorM6S_hDiscount.jpg" alt="plextorM6S_hDiscount"></a>
+                  <a href="item.php?id=176"><img class="slide-image" src="../images/plextorM6S_hDiscount.jpg" alt="plextorM6S_hDiscount"></a>
                 </div>
                 <div class="item">
-                  <a href="item_FlyAHorse.html"><img class="slide-image" src="../images/howToFlyAHorse.jpg" alt="howToFlyAHorse"></a>
+                  <a href="item.php?id=165"><img class="slide-image" src="../images/howToFlyAHorse.jpg" alt="howToFlyAHorse"></a>
                 </div>
               </div>
               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
