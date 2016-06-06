@@ -3,7 +3,7 @@
 $sn = "localhost";
 $db = "group_06";
 $un = "root";
-$pw = "";
+$pw = "123456";
 
 $link = mysqli_connect($sn, $un, $pw, $db) or die("資料庫連結有誤！<br>");
 // encoding

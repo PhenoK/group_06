@@ -1,5 +1,6 @@
 <?php
 include 'initial.php';
+include 'connect.php';
 
 if(!$logged)
     header("location:signIn.php");
@@ -16,9 +17,9 @@ if(!$logged)
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
         <script type="text/javascript"  src="additional-methods.min.js"></script>
             <script>
-            
+
             $(document).ready(function($) {
-                
+
                 jQuery.validator.addMethod("isDate", function(value, element) {
                     var ereg = /^(\d{1,4})(-|\/)(\d{1,2})(-|\/)(\d{1,2})$/;
                     var r = value.match(ereg);
@@ -59,9 +60,9 @@ if(!$logged)
                             url: "update.php",
                             dataType: "text",
                             data: $('#form_sU').serialize(),
-                            
+
                         });
-                       
+
                     },
 
                     errorPlacement: function(error, element) {
@@ -75,7 +76,7 @@ if(!$logged)
                     },
 
                     rules: {
-                        
+
                        pass: {
                             remote: {
                                 url: "pass_ck.php",
@@ -91,14 +92,14 @@ if(!$logged)
                             enNum: true,
                         },
                         pwd: {
-                            
+
                             minlength: 6,
                             maxlength: 12,
                             noSpace: true,
                             enNum: true,
                         },
                         pwd_ck: {
-                            
+
                             minlength: 6,
                             maxlength: 12,
                             equalTo: "#pwd",
@@ -136,10 +137,10 @@ if(!$logged)
                             maxlength: 10,
                             noSpace: true,
                         }
-                       
+
                     },
                     messages: {
-                        
+
                         pass: {
                             required: "密碼為必填欄位",
                             remote: "密碼輸入錯誤",
@@ -179,7 +180,7 @@ if(!$logged)
                 });
 
             });
-              
+
             </script>
             <style type="text/css">
             .error {
@@ -189,15 +190,15 @@ if(!$logged)
                 display: block;
                 padding: 1px;
             }
-            
-            
-            
+
+
+
             .table-bordered > tbody > tr > td,
             .table-bordered > tfoot > tr > th {
                 font-color: rgb(0, 0, 204);
                 font-family: "微軟正黑體";
             }
-            
+
             textarea {
                 resize: none;
             }
@@ -206,15 +207,12 @@ if(!$logged)
 
     <body>
     <?php
-        $link = @mysqli_connect( 'localhost', 'root', '','group_06');  
         $user = $_SESSION['user'];
         $sql = "SELECT * FROM member where account = '$user'";
-        mysqli_query($link,'SET CHARACTER SET utf8');
-        mysqli_query($link,"SET collation_connection = 'utf8_chinese_ci'");
-        $result = mysqli_query($link, $sql); 
-        if ( $result = mysqli_query($link, $sql) ) 
-        {   
-                                           
+        $result = mysqli_query($link, $sql);
+        if ( $result = mysqli_query($link, $sql) )
+        {
+
             $row = mysqli_fetch_assoc($result);
             $acc = $row["account"];
             $name = $row["name"];
@@ -224,7 +222,7 @@ if(!$logged)
             $addr = $row["addr"];
             $mail = $row["mail"];
             $nickname = $row["nickname"];
-            
+
         mysqli_free_result($result);
         }
         mysqli_close($link);
@@ -257,7 +255,7 @@ if(!$logged)
                                                     </td>
                                                     <td class="col-md-6 col-md-offset-2">
                                                         <input type="password" class="form-inline col-md-4 col-md-offset-1" id="pass" name="pass" ><span id="pass_msg" style="color:red;"></span>
-                                                        
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -304,7 +302,7 @@ if(!$logged)
                                                         <?php }    else{?>
                                                         <input class="form-inline col-md-1" type="radio" id="gender" name="gender" value="F">
                                                         <label class="pull-left">女 性</label>
-                                                        <?php }?>  
+                                                        <?php }?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -349,7 +347,7 @@ if(!$logged)
                                                 </tr>
                                             </tbody>
                                         </table>
-                                      
+
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
@@ -371,7 +369,7 @@ if(!$logged)
         <?php include 'footer.php'; ?>
         <!-- Bootstrap Core JavaScript -->
         <!-- Latest compiled and minified JavaScript -->
-      
+
         <!-- Custom Theme JavaScript -->
         <script src="../js/sb-admin-2.js"></script>
     </body>
