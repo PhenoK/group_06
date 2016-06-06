@@ -46,6 +46,9 @@
                               "label": "價格:",
                               "name": "price"
                           }, {
+                              "label": "商品簡介:",
+                              "name": "content"
+                          },{
                               "label": "商品存貨量:",
                               "name": "inventory"
                           }, {
