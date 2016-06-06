@@ -50,7 +50,6 @@
     <div class="panel panel-info">
       <div class="panel-heading">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-        <br />
         <h4 class="panel-title" id="searchLabel"><i class="fa fa-search"></i> 搜尋商品（選填）</h4>
       </div>
       <form action="product.php" id="search_form" method="get" accept-charset="utf-8" role="form">
@@ -71,9 +70,9 @@
           <fieldset>
             <label for="price_min" style="font-weight:bold;">請選擇價格區間</label>
             <ul class="list-group">
-              從
+              從（請輸入10的倍數）
               <input type="number" id="price_min" class="form-control" name="price_min" min="0" step="10" max="200000" value="" />
-              到
+              到（請輸入10的倍數）
               <input type="number" id="price_max" class="form-control" name="price_max" min="0" step="10" max="200000" value="" />
             </ul>
           </fieldset>
