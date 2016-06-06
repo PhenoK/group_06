@@ -26,14 +26,19 @@
 		if($type==1)
 		{
 			$sql="UPDATE article SET text='$newmsg',edit_time='$new_time' WHERE time='$time' AND account='$acc' AND id='$a_id'";
+			mysqli_query($link,$sql);
 		}
 		else
 		{
-			$sql="UPDATE article_response SET text='$newmsg',edit_time='$new_time' WHERE time='$time' AND account='$acc' AND a_id='$a_id'";
+			$sql="UPDATE article_response SET text='$newmsg',time='$new_time' WHERE time='$time' AND account='$acc' AND a_id='$a_id'";
+			mysqli_query($link,$sql);
+
+			$sql="UPDATE article SET edit_time='$new_time' WHERE id='$a_id'";
+			mysqli_query($link,$sql);
 		}
 		
 		
-		$result=mysqli_query($link,$sql);
+		$result=
 
 		
 		echo " <script language='JavaScript'>history.go(-1);</script>";
