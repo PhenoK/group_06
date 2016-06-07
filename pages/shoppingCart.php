@@ -178,36 +178,36 @@ $arr_cart = array_filter(explode(",", $cart));
             </thead>
             <?php
 
-            $sql = "SELECT * FROM product";
-            if ($result = mysqli_query($link, $sql)){
+
               for ($i = 0; $i < count($arr_cart); ++$i){
-                echo "<tbody>";
-                echo "<tr>";
+                $sql = "SELECT * FROM product WHERE id = '$arr_cart[$i]'";
+                if ($result = mysqli_query($link, $sql)){
 
-                // 根據商品id，seek offset :商品id - 1
-                mysqli_data_seek($result, $arr_cart[$i] - 1);
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['id'];
-                echo "<td>" . ($i + 1) . "</td>";
-                echo "<td class=\"p_id\">" . $id . "</td>";
-                echo "<td>" . $row['name'] . "</td>";
-                echo "<td>" . $row['inventory'] . "</td>";
-                echo "<td class=\"item_price\">" . $row['price'] . "</td>";
-                // 購買數量
-                echo "<td>";
-                $tmp = $i + 1;
-                $price = $row['price'];
-                // 有很多個購物車品項數量select，因此name用陣列
-                echo "<select class=\"selectpicker quantity\" data-width=\"fit\" data-style=\"btn-default\" data-live-search=\"true\"></select>";
-                echo "</td>";
-                // 小計
-                echo "<td class=\"item_total_price\">" . $row['price'] * 1 . "</td>";
+                  echo "<tbody>";
+                  echo "<tr>";
 
-                echo "<td><button type=\"button\" class=\"btn btn-warning delCartItem\"> <i class=\"fa fa-times-circle\"></i> 刪除 </button></td>";
+                  $row = mysqli_fetch_assoc($result);
+                  $id = $row['id'];
+                  echo "<td>" . ($i + 1) . "</td>";
+                  echo "<td class=\"p_id\">" . $id . "</td>";
+                  echo "<td>" . $row['name'] . "</td>";
+                  echo "<td>" . $row['inventory'] . "</td>";
+                  echo "<td class=\"item_price\">" . $row['price'] . "</td>";
+                  // 購買數量
+                  echo "<td>";
+                  $tmp = $i + 1;
+                  $price = $row['price'];
+                  // 有很多個購物車品項數量select，因此name用陣列
+                  echo "<select class=\"selectpicker quantity\" data-width=\"fit\" data-style=\"btn-default\" data-live-search=\"true\"></select>";
+                  echo "</td>";
+                  // 小計
+                  echo "<td class=\"item_total_price\">" . $row['price'] * 1 . "</td>";
 
-                echo "</tr>";
-                echo "</tbody>";
-              }
+                  echo "<td><button type=\"button\" class=\"btn btn-warning delCartItem\"> <i class=\"fa fa-times-circle\"></i> 刪除 </button></td>";
+
+                  echo "</tr>";
+                  echo "</tbody>";
+                }
             }
              ?>
             <tfoot>
