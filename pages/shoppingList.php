@@ -40,7 +40,7 @@ if ($_SESSION['user'] != $account){
           location.reload();
         }
         else {
-          alert(text + "gfg");
+          alert(text);
           return;
         }
 
