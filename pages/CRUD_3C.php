@@ -5,7 +5,7 @@
   <title>歡迎來到元經樵屋頂拍賣</title>
   <?php include 'head.php'; ?>
   <?php include 'initial.php'; ?>
- 
+  <?php if($_SESSION['level']!=2) header("location:signIn.php");?>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.0/css/buttons.dataTables.min.css">
