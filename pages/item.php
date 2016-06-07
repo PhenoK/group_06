@@ -95,6 +95,10 @@ else
                         url: "send_msg.php",
                         dataType: "text",
                         data: $('#form_msg').serialize(),
+
+                        success: function(){
+                            location.reload();
+                        }
                     });
                 },
                 errorPlacement: function(error, element) {

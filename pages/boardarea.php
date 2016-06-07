@@ -92,7 +92,7 @@
 	<div class="board_area">
 		<div class="row col-md-12" style="margin-bottom: 10px;">
 			<div class="col-md-4 pull-left">
-				<select class="selectpicker" multiple title="單頁文章數" devision="<?=$_GET['devision']?>" id="<?=$page?>" name="select_page" data-width="fit">
+				<select class="selectpicker" title="單頁文章數" devision="<?=$_GET['devision']?>" id="<?=$page?>" name="select_page" data-width="fit">
 					<option value="10">10筆</option>
 					<option value="15">15筆</option>
 					<option value="20">20筆</option>
