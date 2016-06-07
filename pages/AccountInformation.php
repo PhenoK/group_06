@@ -353,7 +353,7 @@ if(!$logged)
                                         <div class="row">
                                             <div class="col-sm-2 col-sm-offset-3">
                                                  <label>
-                                                    <button type="submit" class="btn btn-primary " onclick="check()">確定修改</button>
+                                                    <button type="submit" class="btn btn-primary " >確定修改</button>
                                                 </label>
 
                                             </div>
